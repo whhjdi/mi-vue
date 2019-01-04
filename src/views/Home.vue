@@ -1,24 +1,120 @@
 <template>
-  <div class="home"><van-button type="primary">默认按钮</van-button></div>
+  <div class="home">
+    <van-swipe :autoplay="3000" indicator-color="white">
+      <van-swipe-item v-for="(item, index) in banners" :key="index">
+        <img :src="item.item.pic_url" alt="" class="banner" />
+      </van-swipe-item>
+    </van-swipe>
+    <div class="recommend">
+      <h2 class="title">{{ recommend.title }}</h2>
+      <ul class="list-wrapper">
+        <li
+          v-for="(item, index) in recommend.items"
+          class="list-item"
+          :key="index"
+          :style="{ backgroundColor: item.item.bg_color }"
+        >
+          <div class="title" :style="{ color: item.item.title_color }">
+            {{ item.item.title }}
+          </div>
+          <div class="subtitle" :style="{ color: item.item.subtitle_color }">
+            {{ item.item.subtitle }}
+          </div>
+          <img v-lazy="item.item.pic_url" alt="" class="item-img" />
+        </li>
+      </ul>
+    </div>
+    <div class="neweProduct-wrapper">
+      <home-list :list="newProduct"></home-list>
+    </div>
+  </div>
 </template>
 
 <script>
-import { Button } from "vant";
-
+import { Swipe, SwipeItem } from "vant";
+import HomePage from "../api/home.js";
+import HomeList from "../components/HomeList";
 export default {
-  name: "",
+  name: "Home",
   components: {
-    [Button.name]: Button
+    HomeList,
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem
   },
   props: {},
   data() {
-    return {};
+    return {
+      banners: [],
+      recommend: {},
+      neweProduct: {}
+    };
   },
   watch: {},
   computed: {},
-  methods: {},
-  created() {},
+  methods: {
+    async getBanner() {
+      const res = await HomePage.fetchHomePage();
+      let homepage = res.data.homepage.floors;
+      let selfRecommend = res.data.recommend.floors;
+      homepage.forEach((item, index) => {
+        switch (item.floor_id) {
+          case 189:
+            this.banners = item.data.items;
+            break;
+          case 929:
+            this.recommend = item.data;
+            break;
+          case 33:
+            this.newProduct = item.data;
+            break;
+          default:
+        }
+      });
+    }
+  },
+  created() {
+    this.getBanner();
+  },
   mounted() {}
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.home {
+  .banner {
+    width: 100%;
+  }
+  .recommend {
+    .list-wrapper {
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 0 1%;
+      .list-item {
+        width: 48%;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 4px;
+        padding: 2px;
+        .title {
+          align-self: flex-start;
+          margin: 10px 0 0 14px;
+        }
+        .subtitle {
+          align-self: flex-start;
+          font-size: 12px;
+          margin: 10px 0 0 14px;
+        }
+        .item-img {
+          width: 50%;
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+}
+</style>
