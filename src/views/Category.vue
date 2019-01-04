@@ -1,15 +1,11 @@
 <template>
-  <div class="home"><van-button type="primary">默认按钮</van-button></div>
+  <div class=""></div>
 </template>
 
 <script>
-import { Button } from "vant";
-
 export default {
   name: "",
-  components: {
-    [Button.name]: Button
-  },
+  components: {},
   props: {},
   data() {
     return {};
