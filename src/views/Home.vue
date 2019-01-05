@@ -25,7 +25,7 @@
       </ul>
     </div>
     <div class="newProduct-wrapper">
-      <home-list :list="newProduct"></home-list>
+      <home-list :list="newProduct" @handleDetail="handleDetail"></home-list>
     </div>
     <div class="home-list-wrapper">
       <div
@@ -34,7 +34,7 @@
         :key="item.data.floor_id"
       >
         <h2 class="title">{{ item.data.title }}</h2>
-        <home-list :list="item.data" @handleDetail="getDetail"></home-list>
+        <home-list :list="item.data" @handleDetail="handleDetail"></home-list>
       </div>
     </div>
   </div>
@@ -87,7 +87,14 @@ export default {
         }
       });
     },
-    getDetail() {}
+    handleDetail(id) {
+      this.$router.push({
+        name: "detail",
+        params: {
+          id
+        }
+      });
+    }
   },
   created() {
     this.getBanner();
@@ -102,7 +109,7 @@ export default {
   bottom: 60px;
   left: 0;
   right: -8px;
-  padding: 8px 8px 8px 0;
+  padding: 0 8px 8px 0;
   background: #fefefe;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

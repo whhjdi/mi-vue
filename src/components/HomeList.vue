@@ -30,8 +30,6 @@ export default {
   computed: {},
   methods: {
     handleClick(gid) {
-      console.log(22);
-
       this.$emit("handleDetail", gid);
     }
   },
