@@ -24,8 +24,18 @@
         </li>
       </ul>
     </div>
-    <div class="neweProduct-wrapper">
+    <div class="newProduct-wrapper">
       <home-list :list="newProduct"></home-list>
+    </div>
+    <div class="home-list-wrapper">
+      <div
+        class="home-list"
+        v-for="item in homeCategory"
+        :key="item.data.floor_id"
+      >
+        <h2 class="title">{{ item.data.title }}</h2>
+        <home-list :list="item.data" @handleDetail="getDetail"></home-list>
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +56,8 @@ export default {
     return {
       banners: [],
       recommend: {},
-      neweProduct: {}
+      newProduct: {},
+      homeCategory: []
     };
   },
   watch: {},
@@ -56,7 +67,8 @@ export default {
       const res = await HomePage.fetchHomePage();
       let homepage = res.data.homepage.floors;
       let selfRecommend = res.data.recommend.floors;
-      homepage.forEach((item, index) => {
+      let homeCategory = [];
+      homepage.forEach(item => {
         switch (item.floor_id) {
           case 189:
             this.banners = item.data.items;
@@ -69,7 +81,30 @@ export default {
             break;
           default:
         }
+        if (item.module_key === "product_category") {
+          homeCategory = homeCategory.concat(item);
+          this.homeCategory = homeCategory;
+        }
       });
+    },
+    getDetail(gid) {
+      let formdata = new FormData();
+      formdata.append(
+        "data",
+        `{"detail":{"model":"Shopv2","action":"getDetail","parameters":{"gid":${gid}}},"comment":{"model":"Comment","action":"getList","parameters":{"goods_id":${gid},"orderby":"1","pageindex":"0","pagesize":3}},"activity":{"model":"Activity","action":"getAct","parameters":{"gid":${gid}}}}`
+      );
+      fetch("https://home.mi.com/app/shop/pipe", {
+        method: "POST",
+        headers: {
+          Referer: `https://home.mi.com/detail?gid=${gid}`,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: formdata
+      })
+        .then(response => response.json())
+        .then(result => {
+          console.log(result);
+        });
     }
   },
   created() {
@@ -80,10 +115,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
+  padding-bottom: 60px;
   .banner {
     width: 100%;
   }
   .recommend {
+    margin-bottom: 10px;
     .list-wrapper {
       box-sizing: border-box;
       display: flex;
