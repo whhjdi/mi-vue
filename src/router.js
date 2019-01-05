@@ -32,6 +32,18 @@ export default new Router({
       path: "/user",
       name: "user",
       component: () => import(/* webpackChunkName: "user" */ "./views/User.vue")
+    },
+    {
+      path: "commodity/detail/:id",
+      name: "detail",
+      component: () =>
+        import(/* webpackChunkName: "product" */ "./views/Detail.vue")
+    },
+    {
+      path: "commodity/list/:id",
+      name: "list",
+      component: () =>
+        import(/* webpackChunkName: "product" */ "./views/Detail.vue")
     }
   ]
 });

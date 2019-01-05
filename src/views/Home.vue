@@ -66,7 +66,7 @@ export default {
     async getBanner() {
       const res = await HomePage.fetchHomePage();
       let homepage = res.data.homepage.floors;
-      let selfRecommend = res.data.recommend.floors;
+      // let selfRecommend = res.data.recommend.floors;
       let homeCategory = [];
       homepage.forEach(item => {
         switch (item.floor_id) {

@@ -6,6 +6,9 @@ class HomePage {
   static fetchCategory() {
     return fetchData("category");
   }
+  static productView() {
+    return fetchData("productView");
+  }
 }
 
 export default HomePage;

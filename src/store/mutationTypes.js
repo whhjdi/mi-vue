@@ -1,0 +1,1 @@
+export const SET_SHOW_FOOTER = "SET_SHOW_FOOTER";

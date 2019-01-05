@@ -1,22 +1,24 @@
 <template>
-  <div class="the-footer">
-    <div class="footer-wrapper">
-      <router-link
-        :to="nav.link"
-        v-for="nav in navigation"
-        :key="nav.icon"
-        active-class="on"
-        tag="div"
-        class="nav"
-      >
-        <svg class="icon" aria-hidden="true">
-          <use
-            :xlink:href="nav.link == $route.name ? nav.iconon : nav.icon"
-          ></use></svg
-        ><span>{{ nav.name }}</span></router-link
-      >
+  <transition name="fade">
+    <div class="the-footer" v-show="showFooter">
+      <div class="footer-wrapper">
+        <router-link
+          :to="nav.link"
+          v-for="nav in navigation"
+          :key="nav.icon"
+          active-class="on"
+          tag="div"
+          class="nav"
+        >
+          <svg class="icon" aria-hidden="true">
+            <use
+              :xlink:href="nav.link == $route.name ? nav.iconon : nav.icon"
+            ></use></svg
+          ><span>{{ nav.name }}</span></router-link
+        >
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -46,6 +48,7 @@ const navigation = [
     link: "user"
   }
 ];
+import { mapGetters } from "vuex";
 export default {
   name: "",
   components: {},
@@ -56,7 +59,9 @@ export default {
     };
   },
   watch: {},
-  computed: {},
+  computed: {
+    ...mapGetters(["showFooter"])
+  },
   methods: {},
   created() {},
   mounted() {}
@@ -94,5 +99,13 @@ export default {
       }
     }
   }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  transform: translateY(100%);
 }
 </style>

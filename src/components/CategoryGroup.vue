@@ -1,12 +1,18 @@
 <template>
   <div class="category-group">
     <ul class="list-group">
-      <li class="list-item" v-for="(item, index) in list" :key="index">
+      <router-link
+        class="list-item"
+        v-for="(item, index) in list"
+        :key="index"
+        tag="li"
+        :to="{ name: 'detail', params: { id: item.category_id } }"
+      >
         <div class="group-item-img">
           <img v-lazy="item.img_url" alt="" class="product-img" />
         </div>
         <div class="product-name">{{ item.product_name }}</div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
