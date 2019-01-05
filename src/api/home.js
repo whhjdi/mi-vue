@@ -6,8 +6,12 @@ class HomePage {
   static fetchCategory() {
     return fetchData("category");
   }
-  static productView() {
-    return fetchData("productView");
+  static fetchProductView(id) {
+    return fetchData("productView", {
+      params: {
+        id
+      }
+    });
   }
 }
 
