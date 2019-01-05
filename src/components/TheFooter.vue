@@ -85,7 +85,7 @@ export default {
       align-items: center;
       flex: 1 1 auto;
       &.on {
-        color: #ff3f72;
+        color: #855a30;
       }
       .icon {
         margin-bottom: 2px;

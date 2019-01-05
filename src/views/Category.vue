@@ -117,7 +117,11 @@ export default {
     left: 0;
     top: 0;
     bottom: 60px;
-    overflow: auto;
+    right: -8px;
+    padding: 8px 6px 8px 0;
+    background: #fefefe;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     .nav-list {
       border-right: 1px solid #e8e8e8;
       .list-item {
@@ -134,11 +138,15 @@ export default {
   .detail {
     margin-left: 100px;
     position: fixed;
-    right: 0;
     left: 0;
     top: 0;
     bottom: 60px;
     overflow: auto;
+    right: -8px;
+    padding: 8px 6px 8px 0;
+    background: #fefefe;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     .list-item-wrapper {
       .content {
         .group-title {

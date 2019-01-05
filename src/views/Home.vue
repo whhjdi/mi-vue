@@ -87,25 +87,7 @@ export default {
         }
       });
     },
-    getDetail(gid) {
-      let formdata = new FormData();
-      formdata.append(
-        "data",
-        `{"detail":{"model":"Shopv2","action":"getDetail","parameters":{"gid":${gid}}},"comment":{"model":"Comment","action":"getList","parameters":{"goods_id":${gid},"orderby":"1","pageindex":"0","pagesize":3}},"activity":{"model":"Activity","action":"getAct","parameters":{"gid":${gid}}}}`
-      );
-      fetch("https://home.mi.com/app/shop/pipe", {
-        method: "POST",
-        headers: {
-          Referer: `https://home.mi.com/detail?gid=${gid}`,
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formdata
-      })
-        .then(response => response.json())
-        .then(result => {
-          console.log(result);
-        });
-    }
+    getDetail() {}
   },
   created() {
     this.getBanner();
@@ -115,7 +97,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
-  padding-bottom: 60px;
+  position: fixed;
+  top: 0;
+  bottom: 60px;
+  left: 0;
+  right: -8px;
+  padding: 8px 8px 8px 0;
+  background: #fefefe;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   .banner {
     width: 100%;
   }
