@@ -112,6 +112,21 @@
         text-overflow: ellipsis;
       }
     }
+    .service-policy-item {
+      font-size: 12px;
+      line-height: 20px;
+      margin-right: 10px;
+      flex: 0 1 auto;
+      .img-icon {
+        height: 12px;
+        width: auto;
+        margin: 2px 5px 0 0;
+      }
+      .fsc1 {
+        font-size: 10px;
+        color: rgba(0,0,0,.54);
+      }
+    }
   }
   .more:after {
     content: "";
@@ -131,5 +146,8 @@
   .addCart {
     background-color: #ab8a59;
     border: 0.05333rem solid #ab8a59;
+  }
+  .van-goods{
+    box-shadow: 0 0 10px 1px #ddd;
   }
 }

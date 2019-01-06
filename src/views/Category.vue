@@ -1,5 +1,15 @@
 <template>
   <div class="category">
+    <van-popup v-model="showNavBar" position="top" :overlay="false">
+      <van-nav-bar
+        title="分类"
+        @click-left="onClickLeft"
+        @click-right="onClickRight"
+      >
+        <van-icon name="arrow-left" slot="left" color="#000" size="20px" />
+        <van-icon name="search" slot="right" color="#000" size="20px" />
+      </van-nav-bar>
+    </van-popup>
     <div class="nav">
       <ul class="nav-list">
         <li
@@ -48,9 +58,13 @@
 <script>
 import HomePage from "../api/home.js";
 import CategoryGroup from "../components/CategoryGroup";
+import { titleNavBarMinxin } from "../mixins.js";
 export default {
   name: "category",
-  components: { CategoryGroup },
+  components: {
+    CategoryGroup
+  },
+  mixins: [titleNavBarMinxin],
   props: {},
   data() {
     return {
@@ -109,11 +123,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .category {
+  .van-nav-bar {
+    height: 50px;
+  }
   .nav {
     width: 100px;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 50px;
     bottom: 60px;
     right: -8px;
     padding: 8px 6px 8px 0;
@@ -137,7 +154,7 @@ export default {
     margin-left: 100px;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 50px;
     bottom: 60px;
     overflow: auto;
     right: -8px;

@@ -1,6 +1,4 @@
-import {
-  mapMutations
-} from "vuex";
+import { mapMutations } from "vuex";
 import {
   Swipe,
   SwipeItem,
@@ -41,7 +39,8 @@ export default {
       commentView: {},
       descTabsView: [],
       selectedGood: {},
-      deliveryData: [{
+      deliveryData: [
+        {
           code: "110000",
           name: "北京市"
         },
@@ -119,7 +118,6 @@ export default {
       this.selectedGood = val;
     },
     confirmArea(arr) {
-      console.log(arr);
       this.deliveryData = arr;
       this.showAddressPop = false;
     },

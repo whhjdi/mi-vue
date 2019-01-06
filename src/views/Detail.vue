@@ -72,18 +72,22 @@
       </div>
     </div>
     <!-- product-section 保险-->
-    <div class="product-section">
+    <div
+      class="product-section"
+      v-if="selectedGood.service_refound_policy_list"
+    >
       <div class="wrapper service-policy-list">
-        <!-- <div
+        <div
           v-for="(list, index) in selectedGood.service_refound_policy_list.list"
           :key="index"
           class="flex service-policy-item"
         >
           <img :src="list.img_url" class="mr1x img-icon" />
           <span class="fsc1">{{ list.item_name }}</span>
-        </div> -->
+        </div>
       </div>
     </div>
+
     <!-- area选择 -->
     <van-popup v-model="showAddressPop" position="bottom">
       <van-area
@@ -94,7 +98,7 @@
     </van-popup>
 
     <!-- 底栏 -->
-    <van-goods-action>
+    <van-goods-action class="van-goods">
       <van-goods-action-mini-btn
         icon="chat-o"
         text="客服"

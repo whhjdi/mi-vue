@@ -304,7 +304,7 @@ export default {
       }
     }
     .content-wrapper {
-      height: 390px;
+      height: 360px;
       overflow-y: scroll;
     }
     .max5 {
@@ -413,12 +413,14 @@ export default {
       left: 0;
       right: 0;
       background: #fff;
+      box-shadow: 0 0 4px 1px #ddd;
+      height: 80px;
       .text {
         width: 50%;
         height: 50px;
         background: #ab8a59;
         line-height: 50px;
-        margin: 0 auto;
+        margin: 15px auto;
         color: #fff;
       }
     }
