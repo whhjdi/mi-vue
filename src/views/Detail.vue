@@ -49,7 +49,7 @@
         <div class="title">已选</div>
         <div class="flex">
           <div class="info">
-            {{ selectedGood.name }} x{{ selectedGood.buyNumber }}
+            {{ selectedGood.name }} {{ selectedGood.buyNumber }}
           </div>
           <div class="act-icon"></div>
         </div>
@@ -113,7 +113,7 @@
       />
     </van-goods-action>
     <!-- sku -->
-    <van-popup v-model="showSku" position="bottom">
+    <van-popup v-model="showSku" position="bottom" :lazy-render="false">
       <Sku
         ref="sku"
         :productData="productData"
