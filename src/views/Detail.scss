@@ -1,0 +1,135 @@
+.detail {
+  position: fixed;
+  top: 0;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 40px;
+    z-index: 9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    .icon {
+      width: 24px;
+      height: 24px;
+      padding: 5px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      color: #fff;
+    }
+  }
+  .swiper {
+    .swiper-item {
+      .swiper-img {
+        width: 100%;
+      }
+    }
+  }
+  .overview {
+    margin-bottom: 20px;
+    .goods-name {
+      font-size: 24px;
+      font-weight: 800px;
+      text-align: left;
+      margin: 20px;
+    }
+    .goods-brief {
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.54);
+      font {
+        color: #b60b0a !important;
+      }
+    }
+    .goods-price {
+      padding: 10px;
+      text-align: left;
+      .cur-price {
+        color: #b60b0a;
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .origin-price {
+        margin-left: 8px;
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 12px;
+        text-decoration: line-through;
+      }
+    }
+  }
+  .product-section {
+    position: relative;
+    padding: 10px 16px;
+    background: #f6f6f6;
+    border-top: 1px;
+    text-align: left;
+    border-radius: 8px;
+    margin: 5px 10px;
+    .title {
+      width: 41px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.54);
+      line-height: 20px;
+    }
+    .flex {
+      display: flex;
+      .info {
+        font-size: 14px;
+      }
+    }
+    .act-icon {
+      position: relative;
+      padding-right: 10%;
+      white-space: nowrap;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .icon-desc {
+        color: #ab8a59;
+        border-radius: 1px;
+        padding: 1.5px 2.5px 0.5px;
+        margin: 0 0 0.5px;
+        font-size: 8px;
+        &:before {
+          border-color: #ab8a59;
+        }
+      }
+      .icon-title {
+        margin-left: 4.17px;
+        font-size: 12px;
+        line-height: 20px;
+        color: rgba(0, 0, 0, 0.87);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .more:after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-left: 1px solid currentColor;
+    border-top: 1px solid currentColor;
+    transform: translate3d(0, -50%, 0) rotate(135deg);
+  }
+  .buyNow {
+    background: #b60b0a;
+    border: 1px solid #b60b0a;
+  }
+  .addCart {
+    background-color: #ab8a59;
+    border: 0.05333rem solid #ab8a59;
+  }
+}
