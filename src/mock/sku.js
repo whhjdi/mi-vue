@@ -107,7 +107,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "2",
+    "buy_limit": "10000",
     "commodity_id": 1181500027,
     "goods_id": 2181500027,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621089.05828574!144x1440.jpg",
@@ -297,7 +297,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "10000",
     "commodity_id": 1182100060,
     "goods_id": 2182100060,
     "image_share": "http://i8.mifile.cn/a1/pms_1527144852.30594249!144x1440.jpg",
@@ -515,7 +515,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "2",
+    "buy_limit": "200",
     "commodity_id": 1181500025,
     "goods_id": 2181500025,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621078.90015819!144x1440.jpg",
@@ -705,7 +705,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500030,
     "goods_id": 2181500030,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621215.02256716!144x1440.jpg",
@@ -895,7 +895,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500039,
     "goods_id": 2181500039,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621345.41932270!144x1440.jpg",
@@ -1085,7 +1085,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1182100061,
     "goods_id": 2182100061,
     "image_share": "http://i8.mifile.cn/a1/pms_1527144854.35223360!144x1440.jpg",
@@ -1275,7 +1275,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "2",
+    "buy_limit": "200",
     "commodity_id": 1181500026,
     "goods_id": 2181500026,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621084.0039673!144x1440.jpg",
@@ -1473,7 +1473,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500031,
     "goods_id": 2181500031,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621219.48895957!144x1440.jpg",
@@ -1663,7 +1663,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500040,
     "goods_id": 2181500040,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621350.77238418!144x1440.jpg",
@@ -1853,7 +1853,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1182100062,
     "goods_id": 2182100062,
     "image_share": "http://i8.mifile.cn/a1/pms_1527144856.99441961!144x1440.jpg",
@@ -2043,7 +2043,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500032,
     "goods_id": 2181500032,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621222.66011593!144x1440.jpg",
@@ -2233,7 +2233,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500041,
     "goods_id": 2181500041,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621353.76655431!144x1440.jpg",
@@ -2423,7 +2423,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1182100063,
     "goods_id": 2182100063,
     "image_share": "http://i8.mifile.cn/a1/pms_1527144859.25489991!144x1440.jpg",
@@ -2613,7 +2613,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "2",
+    "buy_limit": "200",
     "commodity_id": 1181500028,
     "goods_id": 2181500028,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621094.77612085!144x1440.jpg",
@@ -2803,7 +2803,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500033,
     "goods_id": 2181500033,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621225.83162698!144x1440.jpg",
@@ -2993,7 +2993,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500042,
     "goods_id": 2181500042,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621358.15368619!144x1440.jpg",
@@ -3183,7 +3183,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1182100064,
     "goods_id": 2182100064,
     "image_share": "http://i8.mifile.cn/a1/pms_1527144860.65731730!144x1440.jpg",
@@ -3373,7 +3373,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "2",
+    "buy_limit": "200",
     "commodity_id": 1181500029,
     "goods_id": 2181500029,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621101.53792312!144x1440.jpg",
@@ -3563,7 +3563,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500034,
     "goods_id": 2181500034,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621229.56695068!144x1440.jpg",
@@ -3753,7 +3753,7 @@ let goods_info = [
       "use_occ": false
     },
     "address_type": "common",
-    "buy_limit": "1",
+    "buy_limit": "100",
     "commodity_id": 1181500043,
     "goods_id": 2181500043,
     "image_share": "http://i8.mifile.cn/a1/pms_1524621361.19832451!144x1440.jpg",

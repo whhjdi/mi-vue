@@ -82,8 +82,6 @@ export default {
       detail.scrollTo(0, top);
     },
     scrollDetail() {
-      console.log(1);
-
       this.$refs.detail.addEventListener("scroll", this.handleScroll);
     },
     handleScroll() {

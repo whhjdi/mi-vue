@@ -192,7 +192,6 @@ export default {
       this.$emit("hideSku");
     },
     init() {
-      console.log(1);
       let buyOption = buy_option;
       goods_info.forEach(item => {
         item.buyNumber = 1;
