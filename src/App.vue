@@ -3,8 +3,15 @@
 </template>
 <script>
 import TheFooter from "./components/TheFooter";
+import { mapActions } from "vuex";
 export default {
-  components: { TheFooter }
+  components: { TheFooter },
+  methods: {
+    ...mapActions(["cartCount"])
+  },
+  created() {
+    this.cartCount();
+  }
 };
 </script>
 <style>
