@@ -97,20 +97,20 @@ export default {
   props: {},
   data() {
     return {
-      allChecked: false,
+      // allChecked: false,
       items: {}
     };
   },
   watch: {
-    allChecked(newVal) {
-      this.items.forEach(item => {
-        if (newVal) {
-          item.sel_status = true;
-        } else {
-          item.sel_status = false;
-        }
-      });
-    }
+    // allChecked(newVal) {
+    //   this.items.forEach(item => {
+    //     if (newVal) {
+    //       item.sel_status = true;
+    //     } else {
+    //       item.sel_status = false;
+    //     }
+    //   });
+    // }
   },
   computed: {
     allPrice() {
@@ -121,6 +121,22 @@ export default {
         });
       }
       return price * 100;
+    },
+    allChecked: {
+      get() {
+        if (this.items && this.items.length) {
+          return this.items.every(item => {
+            return item.sel_status;
+          });
+        } else {
+          return false;
+        }
+      },
+      set(newVal) {
+        this.items.forEach(item => {
+          item.sel_status = newVal;
+        });
+      }
     }
   },
   methods: {
