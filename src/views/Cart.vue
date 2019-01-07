@@ -117,8 +117,6 @@ export default {
       let price = 0;
       if (this.items.length > 0) {
         this.items.forEach(item => {
-          console.log(item.price, item.num);
-
           price += item.price * item.num;
         });
       }
@@ -143,7 +141,7 @@ export default {
       });
     },
 
-    async cartSelect(item, index) {
+    async cartSelect(item) {
       // 获取当前商品的选择信息
       //取反
       let sel_status = item.sel_status ? 0 : 1;

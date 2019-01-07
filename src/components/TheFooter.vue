@@ -17,6 +17,9 @@
           ><span>{{ nav.name }}</span></router-link
         >
       </div>
+      <div class="info" v-show="count">
+        <span>{{ count }}</span>
+      </div>
     </div>
   </transition>
 </template>
@@ -60,7 +63,7 @@ export default {
   },
   watch: {},
   computed: {
-    ...mapGetters(["showFooter"])
+    ...mapGetters(["showFooter", "count"])
   },
   methods: {},
   created() {},
@@ -98,6 +101,20 @@ export default {
         height: 24px;
       }
     }
+  }
+  .info {
+    position: absolute;
+    top: 0;
+    right: 120px;
+    z-index: 99;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-color: #f44;
+    color: #fff;
+    padding: 2px;
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
   }
 }
 .fade-enter-active,

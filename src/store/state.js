@@ -1,5 +1,6 @@
 const state = {
-  showFooter: true
+  showFooter: true,
+  count: 0
 };
 
 export default state;

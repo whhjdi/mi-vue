@@ -7,7 +7,7 @@
   overflow: auto;
   .header {
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 0;
     right: 0;
     width: 100%;
@@ -16,7 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
+    padding: 10px;
     box-sizing: border-box;
     .icon {
       width: 24px;

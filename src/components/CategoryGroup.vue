@@ -1,18 +1,17 @@
 <template>
   <div class="category-group">
     <ul class="list-group">
-      <router-link
+      <li
         class="list-item"
         v-for="(item, index) in list"
         :key="index"
-        tag="li"
-        :to="{ name: 'detail', params: { id: item.category_id } }"
+        @click="handleClick(item.category_id)"
       >
         <div class="group-item-img">
           <img v-lazy="item.img_url" alt="" class="product-img" />
         </div>
         <div class="product-name">{{ item.product_name }}</div>
-      </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -32,7 +31,16 @@ export default {
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    handleClick(id) {
+      this.$router.push({
+        name: "detail",
+        params: {
+          id
+        }
+      });
+    }
+  },
   created() {},
   mounted() {}
 };

@@ -1,4 +1,3 @@
-import { mapMutations } from "vuex";
 import {
   Swipe,
   SwipeItem,
@@ -12,6 +11,7 @@ import HomePage from "../api/home.js";
 import Sku from "../components/Sku";
 import areaList from "../mock/area.js";
 import { setFooterMixin } from "../mixins";
+import { mapGetters } from "vuex";
 export default {
   name: "Detail",
   components: {
@@ -27,7 +27,6 @@ export default {
   props: {},
   data() {
     return {
-      count: 0,
       showSku: false,
       showAddressPop: false,
       areaList: areaList,
@@ -59,6 +58,7 @@ export default {
   },
   watch: {},
   computed: {
+    ...mapGetters(["count"]),
     areaData() {
       let data = "";
       this.deliveryData.forEach(item => {
@@ -132,6 +132,5 @@ export default {
   },
   created() {
     this.getProductView(this.$route.params.id);
-  },
-  mounted() {}
+  }
 };
