@@ -92,13 +92,14 @@ export default {
       flex-direction: column;
       align-items: center;
       flex: 1 1 auto;
+      font-size: 14px;
       &.on {
         color: #855a30;
       }
       .icon {
         margin-bottom: 2px;
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
       }
     }
   }
