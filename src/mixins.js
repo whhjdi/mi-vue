@@ -1,4 +1,6 @@
 import { NavBar, Popup, Icon } from "vant";
+import { mapMutations } from "vuex";
+import { SubmitBar, Checkbox } from "vant";
 const titleNavBarMinxin = {
   data() {
     return {
@@ -26,5 +28,24 @@ const titleNavBarMinxin = {
     next();
   }
 };
-
-export { titleNavBarMinxin };
+const setFooterMixin = {
+  components: {
+    [SubmitBar.name]: SubmitBar,
+    [Checkbox.name]: Checkbox
+  },
+  methods: {
+    ...mapMutations({
+      setShowFooter: "SET_SHOW_FOOTER"
+    })
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.setShowFooter(false);
+    });
+  },
+  beforeRouteLeave(to, from, next) {
+    this.setShowFooter(true);
+    next();
+  }
+};
+export { titleNavBarMinxin, setFooterMixin };

@@ -46,7 +46,7 @@ export default {
     align-items: center;
     .list-item {
       width: 33%;
-      font-size: 16px;
+      font-size: 14px;
       margin-bottom: 20px;
       .group-item-img {
         height: 60px;

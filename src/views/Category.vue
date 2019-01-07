@@ -140,7 +140,7 @@ export default {
     .nav-list {
       border-right: 1px solid #e8e8e8;
       .list-item {
-        font-size: 16px;
+        font-size: 14px;
         padding: 5px 10px;
         margin-bottom: 20px;
         &.active {
@@ -180,7 +180,7 @@ export default {
             .category-title {
               margin-bottom: 15px;
               margin-left: 20px;
-              font-size: 16px;
+              font-size: 14px;
               text-align: left;
               color: #000;
             }

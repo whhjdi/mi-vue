@@ -43,7 +43,12 @@
           <!-- 数量选择 -->
           <div v-if="selectedGood" class="option-number">
             <div class="option-title">购买数量</div>
-            <div class="xm-input-number">
+            <van-stepper
+              v-model="selectedGood.buyNumber"
+              :integer="true"
+              :max="selectedGood.buy_limit"
+            />
+            <!-- <div class="xm-input-number">
               <div
                 class="input-sub"
                 :class="{ active: selectedGood.buyNumber > 1 }"
@@ -67,7 +72,7 @@
                   <use xlink:href="#icon-plus-circle"></use>
                 </svg>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="ywb">
             <div
@@ -128,14 +133,21 @@
 
 <script>
 import { default_goods_id, buy_option, goods_info } from "../mock/sku.js";
-import { Icon, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn } from "vant";
+import {
+  Icon,
+  GoodsAction,
+  GoodsActionBigBtn,
+  GoodsActionMiniBtn,
+  Stepper
+} from "vant";
 export default {
   name: "SKU",
   components: {
     [Icon.name]: Icon,
     [GoodsAction.name]: GoodsAction,
     [GoodsActionBigBtn.name]: GoodsActionBigBtn,
-    [GoodsActionMiniBtn.name]: GoodsActionMiniBtn
+    [GoodsActionMiniBtn.name]: GoodsActionMiniBtn,
+    [Stepper.name]: Stepper
   },
   props: {
     productData: {
@@ -297,7 +309,7 @@ export default {
           margin-bottom: 10px;
         }
         .name {
-          font-size: 18px;
+          font-size: 16px;
           color: rgba(0, 0, 0, 0.87);
           line-height: 20px;
         }
@@ -314,7 +326,7 @@ export default {
         .option-title {
           padding-bottom: 15px;
           line-height: 16px;
-          font-size: 16px;
+          font-size: 14px;
           color: rgba(0, 0, 0, 0.87);
           text-align: left;
           .service-url {
@@ -359,7 +371,7 @@ export default {
             margin-bottom: 10px;
             margin-right: 10px;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 14px;
             &.on {
               border-color: #b60b0a;
               color: #b60b0a;
@@ -383,7 +395,7 @@ export default {
         .option-title {
           padding-bottom: 15px;
           line-height: 16px;
-          font-size: 16px;
+          font-size: 14px;
           color: rgba(0, 0, 0, 0.87);
           text-align: left;
         }

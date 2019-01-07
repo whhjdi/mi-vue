@@ -107,7 +107,7 @@
       <van-goods-action-mini-btn
         icon="cart-o"
         text="购物车"
-        @click="onClickMiniBtn"
+        @click="onClickToCart"
       />
       <van-goods-action-big-btn
         text="加入购物车"

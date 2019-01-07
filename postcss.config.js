@@ -4,7 +4,7 @@ module.exports = {
       browsers: ["Android >= 4.0", "iOS >= 7"]
     },
     "postcss-pxtorem": {
-      rootValue: 37.5 / 2,
+      rootValue: 16,
       propList: ["*"]
     }
   }

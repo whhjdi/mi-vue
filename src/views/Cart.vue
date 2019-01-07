@@ -1,5 +1,6 @@
 <template>
   <div class="cart">
+    <!-- 顶栏 -->
     <van-popup v-model="showNavBar" position="top" :overlay="false">
       <van-nav-bar
         title="购物车"
@@ -10,30 +11,174 @@
         <van-icon name="search" slot="right" color="#000" size="20px" />
       </van-nav-bar>
     </van-popup>
+    <!-- 列表 -->
+    <div class="content">
+      <ul class="list">
+        <li v-for="(item, index) in items" :key="index" class="list-item">
+          <div class="item-wrapper">
+            <!-- 单选 -->
+            <div
+              class="choose flex"
+              :class="{ checked: item.sel_status }"
+              @click="cartSelect(item, index)"
+            >
+              <van-icon
+                v-if="!item.parent_goodsId"
+                :name="item.sel_status ? 'checked' : 'passed'"
+                size="20px"
+              />
+            </div>
+            <!-- 图片 -->
+            <router-link
+              :to="{ name: 'detail', params: { id: item.goodsId } }"
+              class="imgProduct"
+            >
+              <img v-lazy="item.image_url" />
+            </router-link>
+            <!-- 左侧详细信息 -->
+            <div class="info flex">
+              <p class="name">
+                <span class="flex">{{ item.product_name }}</span>
+              </p>
+              <!-- 价格 -->
+              <div v-if="item.price" class="price-without">
+                <span>售价：</span> <span>{{ item.price }}元</span>
+                <template v-if="item.isService">
+                  <span>合计：</span> <span>{{ item.price * item.num }}元</span>
+                </template>
+              </div>
+              <!-- 数量 -->
+              <div class="num">
+                <van-stepper
+                  v-model="item.num"
+                  :max="item.buy_limit"
+                  integer
+                  min="1"
+                ></van-stepper>
+                <div
+                  v-if="item.price"
+                  class="delete"
+                  @click="cartDelete(item, index)"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-delete"></use>
+                  </svg>
+                </div>
+              </div>
+              <!-- 删除 -->
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- 底栏 -->
+    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+      <van-checkbox v-model="allChecked">全选</van-checkbox>
+    </van-submit-bar>
   </div>
 </template>
 
 <script>
-import { titleNavBarMinxin } from "../mixins.js";
+import { titleNavBarMinxin, setFooterMixin } from "../mixins.js";
+import { Card, Button, Stepper, Checkbox } from "vant";
+import Cart from "../api/cart.js";
 export default {
   name: "cart",
-  components: {},
-  mixins: [titleNavBarMinxin],
+  components: {
+    [Card.name]: Card,
+    [Button.name]: Button,
+    [Stepper.name]: Stepper,
+    [Checkbox.name]: Checkbox
+  },
+  mixins: [titleNavBarMinxin, setFooterMixin],
   props: {},
   data() {
-    return {};
+    return {
+      allChecked: false,
+      items: {}
+    };
   },
-  watch: {},
+  watch: {
+    allChecked(newVal) {
+      this.items.forEach(item => {
+        if (newVal) {
+          item.sel_status = true;
+        } else {
+          item.sel_status = false;
+        }
+      });
+    }
+  },
   computed: {},
-  methods: {},
-  created() {},
+  methods: {
+    async cartSelect(item, index) {
+      // 获取当前商品的选择信息
+      //取反
+      let sel_status = item.sel_status ? 0 : 1;
+      //更改接口的商品选择信息
+      await Cart.fetchCartSelCart({
+        GoodsId: item.goodsId,
+        sel_status
+      });
+      //更新本地的信息
+      item.sel_status = sel_status;
+    },
+    async cartDelete(item, index) {
+      await Cart.fetchCartDel({
+        GoodsId: item.goodsId
+      });
+      this.items.splice(index, 1);
+    },
+    onSubmit() {},
+    async getCart() {
+      const res = await Cart.fetchCart();
+      this.setCart(res);
+    },
+    setCart(res) {
+      this.items = res.data.items;
+    },
+    onClickLeft() {
+      this.$router.go(-1);
+    }
+  },
+  created() {
+    this.getCart();
+  },
   mounted() {}
 };
 </script>
 <style lang="scss" scoped>
 .cart {
+  .content {
+    position: fixed;
+    top: 50px;
+    bottom: 50px;
+    width: 100%;
+    overflow-y: scroll;
+    .list {
+      .list-item {
+        padding: 5px 20px;
+        .item-wrapper {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .imgProduct {
+            width: 118px;
+            height: 118px;
+            margin: 0 10px;
+          }
+          .checked {
+            color: #1989fa;
+          }
+        }
+      }
+    }
+  }
   .van-nav-bar {
     height: 50px;
+  }
+  .van-checkbox {
+    margin-left: 20px;
   }
 }
 </style>

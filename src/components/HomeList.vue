@@ -69,13 +69,13 @@ export default {
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 5px;
         line-height: 16px;
       }
       .price {
         color: #b60b0a;
-        font-size: 16px;
+        font-size: 14px;
       }
     }
   }

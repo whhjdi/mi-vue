@@ -11,6 +11,7 @@ import {
 import HomePage from "../api/home.js";
 import Sku from "../components/Sku";
 import areaList from "../mock/area.js";
+import { setFooterMixin } from "../mixins";
 export default {
   name: "Detail",
   components: {
@@ -65,10 +66,8 @@ export default {
       return data;
     }
   },
+  mixins: [setFooterMixin],
   methods: {
-    ...mapMutations({
-      setShowFooter: "SET_SHOW_FOOTER"
-    }),
     goback() {
       this.$router.go(-1);
     },
@@ -108,6 +107,11 @@ export default {
     onClickMiniBtn() {
       console.log("onClickMiniBtn");
     },
+    onClickToCart() {
+      this.$router.push({
+        name: "cart"
+      });
+    },
     onClickBigBtn() {
       this.showSku = true;
     },
@@ -128,14 +132,5 @@ export default {
   created() {
     this.getProductView(this.$route.params.id);
   },
-  mounted() {},
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.setShowFooter(false);
-    });
-  },
-  beforeRouteLeave(to, from, next) {
-    this.setShowFooter(true);
-    next();
-  }
+  mounted() {}
 };
