@@ -27,6 +27,7 @@ export default {
   props: {},
   data() {
     return {
+      count: 0,
       showSku: false,
       showAddressPop: false,
       areaList: areaList,

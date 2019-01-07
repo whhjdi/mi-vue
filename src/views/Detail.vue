@@ -108,6 +108,7 @@
         icon="cart-o"
         text="购物车"
         @click="onClickToCart"
+        info="count"
       />
       <van-goods-action-big-btn
         text="加入购物车"

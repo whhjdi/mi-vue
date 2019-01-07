@@ -8,9 +8,8 @@ const urls = {
   cart: "/cart/index",
   cartEdit: "/cart/edit",
   cartSelCart: "/cart/selcart",
-  cartSelService: "/cart/selService",
   cartDel: "/cart/del",
-  cartAdd: "/cart/add",
+  cartClear: "/cart/clear",
   cartCount: "/cart/count"
 };
 

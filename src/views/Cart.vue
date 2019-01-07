@@ -8,11 +8,12 @@
         @click-right="onClickRight"
       >
         <van-icon name="arrow-left" slot="left" color="#000" size="20px" />
-        <van-icon name="search" slot="right" color="#000" size="20px" />
+        <div slot="right" @click="clearCart">清空</div>
       </van-nav-bar>
     </van-popup>
     <!-- 列表 -->
     <div class="content">
+      <div class="noLogin"></div>
       <ul class="list">
         <li v-for="(item, index) in items" :key="index" class="list-item">
           <div class="item-wrapper">
@@ -36,7 +37,7 @@
               <img v-lazy="item.image_url" />
             </router-link>
             <!-- 左侧详细信息 -->
-            <div class="info flex">
+            <div class="info">
               <p class="name">
                 <span class="flex">{{ item.product_name }}</span>
               </p>
@@ -54,7 +55,10 @@
                   :max="item.buy_limit"
                   integer
                   min="1"
+                  @plus="plusCount(item)"
+                  @minus="minusCount(item)"
                 ></van-stepper>
+                <!-- 删除 -->
                 <div
                   v-if="item.price"
                   class="delete"
@@ -65,14 +69,13 @@
                   </svg>
                 </div>
               </div>
-              <!-- 删除 -->
             </div>
           </div>
         </li>
       </ul>
     </div>
     <!-- 底栏 -->
-    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+    <van-submit-bar :price="allPrice" button-text="提交订单" @submit="onSubmit">
       <van-checkbox v-model="allChecked">全选</van-checkbox>
     </van-submit-bar>
   </div>
@@ -109,8 +112,37 @@ export default {
       });
     }
   },
-  computed: {},
+  computed: {
+    allPrice() {
+      let price = 0;
+      if (this.items.length > 0) {
+        this.items.forEach(item => {
+          console.log(item.price, item.num);
+
+          price += item.price * item.num;
+        });
+      }
+      return price * 100;
+    }
+  },
   methods: {
+    async clearCart() {
+      await Cart.fetchCartClear();
+      this.items = [];
+    },
+    plusCount(item) {
+      this.cartEdit(item, 1);
+    },
+    minusCount(item) {
+      this.cartEdit(item, -1);
+    },
+    async cartEdit(item, num) {
+      await Cart.fetchCartEdit({
+        goodsId: item.goodsId,
+        num
+      });
+    },
+
     async cartSelect(item, index) {
       // 获取当前商品的选择信息
       //取反
@@ -158,17 +190,44 @@ export default {
     .list {
       .list-item {
         padding: 5px 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         .item-wrapper {
           display: flex;
           justify-content: flex-start;
           align-items: center;
+          width: 100%;
+          border-bottom: 1px solid #ddd;
+          padding: 10px 0;
           .imgProduct {
-            width: 118px;
-            height: 118px;
+            width: 100px;
+            height: 100px;
             margin: 0 10px;
           }
           .checked {
             color: #1989fa;
+          }
+          .info {
+            flex-direction: column;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex: 1;
+            .name {
+              font-size: 14px;
+              text-align: left;
+            }
+            .num {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              width: 100%;
+            }
+            .price-without {
+              font-size: 14px;
+              color: rgb(151, 149, 149);
+            }
           }
         }
       }

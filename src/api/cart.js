@@ -9,14 +9,11 @@ class Cart {
   static fetchCartSelCart() {
     return fetchData("cartSelCart");
   }
-  static fetchCartSelService() {
-    return fetchData("cartSelService");
+  static fetchCartClear() {
+    return fetchData("cartClear");
   }
   static fetchCartDel() {
     return fetchData("cartDel");
-  }
-  static fetchCartAdd() {
-    return fetchData("cartAdd");
   }
   static fetchCartCount() {
     return fetchData("cartCount");
