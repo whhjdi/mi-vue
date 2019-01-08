@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <div class="nav-bar">
+      <div class="title" slot="left">沐雪商城</div>
+      <input placeholder="搜一搜" class="input" />
+      <van-icon name="fire" size="24px" class="nav-icon"></van-icon>
+    </div>
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <van-swipe :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="(item, index) in banners" :key="index">
@@ -43,7 +48,7 @@
 </template>
 
 <script>
-import { Swipe, SwipeItem, Toast, PullRefresh } from "vant";
+import { Swipe, SwipeItem, Toast, PullRefresh, Icon } from "vant";
 import HomePage from "../api/home.js";
 import HomeList from "../components/HomeList";
 export default {
@@ -53,7 +58,8 @@ export default {
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem,
     [Toast.name]: Toast,
-    [PullRefresh.name]: PullRefresh
+    [PullRefresh.name]: PullRefresh,
+    [Icon.name]: Icon
   },
   props: {},
   data() {
@@ -127,6 +133,31 @@ export default {
   background: #fefefe;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  .nav-bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 0 10px 1px#ddd;
+    height: 40px;
+    color: #865c30;
+    .title {
+      padding: 5px;
+      margin: 0 5px;
+    }
+    .nav-icon {
+      padding: 5px;
+      margin: 0 5px;
+    }
+    .input {
+      height: 30px;
+      font-size: 12px;
+      background: #e7e7e7;
+      flex: 1;
+      outline: none;
+      border: none;
+      padding: 0 12px;
+    }
+  }
   .banner {
     width: 100%;
   }
