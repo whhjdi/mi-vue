@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { Swipe, SwipeItem } from "vant";
+import { Swipe, SwipeItem, Toast } from "vant";
 import HomePage from "../api/home.js";
 import HomeList from "../components/HomeList";
 export default {
@@ -49,7 +49,8 @@ export default {
   components: {
     HomeList,
     [Swipe.name]: Swipe,
-    [SwipeItem.name]: SwipeItem
+    [SwipeItem.name]: SwipeItem,
+    [Toast.name]: Toast
   },
   props: {},
   data() {
@@ -65,6 +66,7 @@ export default {
   methods: {
     async getBanner() {
       const res = await HomePage.fetchHomePage();
+      this.$toast.clear();
       let homepage = res.data.homepage.floors;
       // let selfRecommend = res.data.recommend.floors;
       let homeCategory = [];

@@ -2,7 +2,7 @@
   <div class="address">
     <van-popup v-model="showNavBar" position="top" :overlay="false">
       <van-nav-bar
-        title="地址编辑"
+        :title="title"
         @click-left="onClickLeft"
         @click-right="onClickRight"
       >
@@ -29,8 +29,7 @@
 
 <script>
 import { AddressEdit } from "vant";
-import Address from "../api/address.js";
-import { titleNavBarMinxin, setFooterMixin } from "../mixins.js";
+import { titleNavBarMixin, setFooterMixin } from "../mixins.js";
 import areaList from "../mock/area.js";
 export default {
   name: "addressEdit",
@@ -38,7 +37,7 @@ export default {
     [AddressEdit.name]: AddressEdit
   },
   props: {},
-  mixins: [titleNavBarMinxin, setFooterMixin],
+  mixins: [titleNavBarMixin, setFooterMixin],
   data() {
     return {
       areaList,
@@ -47,7 +46,11 @@ export default {
     };
   },
   watch: {},
-  computed: {},
+  computed: {
+    title() {
+      return this.$route.params.option === "add" ? "新增地址" : "编辑地址";
+    }
+  },
   methods: {
     onChangeDetail() {},
     onSave(item) {
@@ -60,10 +63,16 @@ export default {
         }
       });
     },
-    onDelete() {},
+    onDelete(item) {
+      this.$router.push({
+        name: "addressList",
+        params: {
+          item,
+          option: "del"
+        }
+      });
+    },
     onClickLeft() {
-      console.log(this.addressInfo);
-
       this.$router.push({
         name: "addressList",
         params: {
@@ -72,7 +81,9 @@ export default {
       });
     },
     onClickRight() {
-      console.log(2);
+      this.$router.push({
+        name: "home"
+      });
     }
   },
   activated() {

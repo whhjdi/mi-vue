@@ -2,7 +2,7 @@
   <div class="address">
     <van-popup v-model="showNavBar" position="top" :overlay="false">
       <van-nav-bar
-        title="地址编辑"
+        title="地址列表"
         @click-left="onClickLeft"
         @click-right="onClickRight"
       >
@@ -14,99 +14,91 @@
       <van-address-list
         v-model="chosenAddressId"
         :list="list"
-        :disabled-list="disabledList"
-        disabled-text="以下地址超出配送范围"
         @add="onAdd"
         @edit="onEdit"
-        v-show="showList"
       />
     </div>
   </div>
 </template>
 
 <script>
+// 由于接口是模拟的，所以无法真正的更改地址，所以每次进入addressList都会恢复到模拟接口的地址
+//每次的更改是可以看到的，刷新后才会恢复默认
 import { AddressList } from "vant";
-import { titleNavBarMinxin, setFooterMixin } from "../mixins.js";
+import { titleNavBarMixin, setFooterMixin } from "../mixins.js";
 import Address from "../api/address.js";
 export default {
-  name: "",
+  name: "addressList",
   components: {
     [AddressList.name]: AddressList
   },
   props: {},
-  mixins: [titleNavBarMinxin, setFooterMixin],
+  mixins: [titleNavBarMixin, setFooterMixin],
   data() {
     return {
       showList: true,
-      addressList: {},
       chosenAddressId: "0",
-      disabledList: [],
       list: []
     };
   },
   watch: {},
-  computed: {
-    // disabledList: {
-    //   get() {
-    //     return this.addressList.disabledList;
-    //   },
-    //   set(val) {
-    //     this.addressList.disabledList = val;
-    //   }
-    // },
-    // list: {
-    //   get() {
-    //     return this.addressList.list;
-    //   },
-    //   set(val) {
-    //     this.addressList.list = val;
-    //   }
-    // }
-  },
+  computed: {},
   methods: {
     onAdd() {
       this.$router.push({
         name: "addressEdit",
         params: {
-          addressInfo: {},
+          addressInfo: {
+            id: Math.floor(Math.random() * 1000),
+            name: "默认",
+            tel: "12312312312"
+          },
           option: "add"
         }
       });
     },
-    onEdit(item, index) {
-      console.log(item);
-
+    onEdit(item) {
       this.$router.push({
         name: "addressEdit",
         params: {
           addressInfo: item,
-          option: "edit",
-          index
+          option: "edit"
         }
       });
     },
     onClickRight() {
-      console.log(2);
+      this.$router.push({
+        name: "home"
+      });
     },
     async getAddressList() {
       const res = await Address.fetchAddressList();
-      this.addressList = res.data;
-      this.disabledList = res.data.disabledList;
-      this.list = res.data.list;
-      this.setList();
+      this.setList(res);
     },
-    setList() {
-      let editItem = this.$route.params.item
-        ? this.$route.params.item
-        : this.list[0];
-      console.log(this.list);
-      console.log(editItem);
-      let editIndex = this.list.findIndex(item => {
-        return item.id === editItem.id;
-      });
-      let newList = JSON.parse(JSON.stringify(this.list));
-      newList.splice(editIndex, 1, editItem);
-      this.list = newList;
+    setList(res) {
+      this.list = res.data.list;
+
+      //下边的完全可以不写，给后台发请求 ,然后根据返回值改变addressList即可
+      let editItem = this.$route.params.item ? this.$route.params.item : null;
+      if (editItem) {
+        let editIndex = this.list.findIndex(item => {
+          return item.id === editItem.id;
+        });
+        console.log(this.$route.params.option, 12);
+        if (this.$route.params.option === "del") {
+          this.list.splice(editIndex, 1);
+          return;
+          //这样理论上是正确的
+        }
+        if (editIndex === -1) {
+          this.list.push(editItem);
+        } else {
+          this.list.splice(editIndex, 1, editItem);
+        }
+        //这个地方其实是没问题的，因为没有真正的接口，
+        //当删除之后，进到地址列表会重新从服务器加载列表（列表没有真正改变）
+        //所以删除一个没问题，删除俩个总会剩一个，这其实是正确的
+      }
     }
   },
 

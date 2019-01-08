@@ -1,7 +1,7 @@
-import { NavBar, Popup, Icon } from "vant";
+import { NavBar, Popup, Icon, Toast } from "vant";
 import { mapMutations } from "vuex";
 import { SubmitBar, Checkbox } from "vant";
-const titleNavBarMinxin = {
+const titleNavBarMixin = {
   data() {
     return {
       showNavBar: false
@@ -47,4 +47,5 @@ const setFooterMixin = {
     next();
   }
 };
-export { titleNavBarMinxin, setFooterMixin };
+
+export { titleNavBarMixin, setFooterMixin};

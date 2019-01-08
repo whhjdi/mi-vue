@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { titleNavBarMinxin, setFooterMixin } from "../mixins.js";
+import { titleNavBarMixin, setFooterMixin } from "../mixins.js";
 import { mapMutations } from "vuex";
 export default {
   name: "",
@@ -30,7 +30,7 @@ export default {
     return {};
   },
   watch: {},
-  mixins: [titleNavBarMinxin, setFooterMixin],
+  mixins: [titleNavBarMixin, setFooterMixin],
   computed: {},
   methods: {
     ...mapMutations({

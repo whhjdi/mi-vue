@@ -6,8 +6,8 @@ import store from "./store/index";
 import "normalize.css";
 import { Lazyload } from "vant";
 Vue.use(Lazyload);
-Vue.config.productionTip = false;
 
+Vue.config.productionTip = false;
 new Vue({
   router,
   store,

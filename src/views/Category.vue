@@ -58,13 +58,13 @@
 <script>
 import HomePage from "../api/home.js";
 import CategoryGroup from "../components/CategoryGroup";
-import { titleNavBarMinxin } from "../mixins.js";
+import { titleNavBarMixin } from "../mixins.js";
 export default {
   name: "category",
   components: {
     CategoryGroup
   },
-  mixins: [titleNavBarMinxin],
+  mixins: [titleNavBarMixin],
   props: {},
   data() {
     return {

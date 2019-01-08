@@ -82,8 +82,8 @@
 </template>
 
 <script>
-import { titleNavBarMinxin, setFooterMixin } from "../mixins.js";
-import { Card, Button, Stepper, Checkbox } from "vant";
+import { titleNavBarMixin, setFooterMixin } from "../mixins.js";
+import { Card, Button, Stepper, Checkbox, Toast } from "vant";
 import Cart from "../api/cart.js";
 export default {
   name: "cart",
@@ -91,9 +91,10 @@ export default {
     [Card.name]: Card,
     [Button.name]: Button,
     [Stepper.name]: Stepper,
-    [Checkbox.name]: Checkbox
+    [Checkbox.name]: Checkbox,
+    [Toast.name]: Toast
   },
-  mixins: [titleNavBarMinxin, setFooterMixin],
+  mixins: [titleNavBarMixin, setFooterMixin],
   props: {},
   data() {
     return {
@@ -166,6 +167,10 @@ export default {
     },
     //提交订单
     onSubmit() {
+      if (this.items.length === 0) {
+        Toast("先买的东西吧，客官");
+        return;
+      }
       let goods = [];
       this.items.forEach(item => {
         if (item.sel_status) {
