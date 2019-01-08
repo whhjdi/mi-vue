@@ -13,7 +13,9 @@ const urls = {
   cartClear: "/cart/clear",
   cartCount: "/cart/count",
   //地址
-  addressList: "/address/list"
+  addressList: "/address/list",
+  //订单
+  checkout: "/checkout"
 };
 
 for (let key in urls) {

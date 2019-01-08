@@ -196,7 +196,7 @@ export default {
       this.$router.go(-1);
     }
   },
-  created() {
+  activated() {
     this.getCart();
   },
   mounted() {}

@@ -1,47 +1,49 @@
 <template>
   <div class="home">
-    <van-swipe :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(item, index) in banners" :key="index">
-        <img :src="item.item.pic_url" alt="" class="banner" />
-      </van-swipe-item>
-    </van-swipe>
-    <div class="recommend">
-      <h2 class="title">{{ recommend.title }}</h2>
-      <ul class="list-wrapper">
-        <li
-          v-for="(item, index) in recommend.items"
-          class="list-item"
-          :key="index"
-          :style="{ backgroundColor: item.item.bg_color }"
-        >
-          <div class="title" :style="{ color: item.item.title_color }">
-            {{ item.item.title }}
-          </div>
-          <div class="subtitle" :style="{ color: item.item.subtitle_color }">
-            {{ item.item.subtitle }}
-          </div>
-          <img v-lazy="item.item.pic_url" alt="" class="item-img" />
-        </li>
-      </ul>
-    </div>
-    <div class="newProduct-wrapper">
-      <home-list :list="newProduct" @handleDetail="handleDetail"></home-list>
-    </div>
-    <div class="home-list-wrapper">
-      <div
-        class="home-list"
-        v-for="item in homeCategory"
-        :key="item.data.floor_id"
-      >
-        <h2 class="title">{{ item.data.title }}</h2>
-        <home-list :list="item.data" @handleDetail="handleDetail"></home-list>
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <van-swipe :autoplay="3000" indicator-color="white">
+        <van-swipe-item v-for="(item, index) in banners" :key="index">
+          <img :src="item.item.pic_url" alt="" class="banner" />
+        </van-swipe-item>
+      </van-swipe>
+      <div class="recommend">
+        <h2 class="title">{{ recommend.title }}</h2>
+        <ul class="list-wrapper">
+          <li
+            v-for="(item, index) in recommend.items"
+            class="list-item"
+            :key="index"
+            :style="{ backgroundColor: item.item.bg_color }"
+          >
+            <div class="title" :style="{ color: item.item.title_color }">
+              {{ item.item.title }}
+            </div>
+            <div class="subtitle" :style="{ color: item.item.subtitle_color }">
+              {{ item.item.subtitle }}
+            </div>
+            <img v-lazy="item.item.pic_url" alt="" class="item-img" />
+          </li>
+        </ul>
       </div>
-    </div>
+      <div class="newProduct-wrapper">
+        <home-list :list="newProduct" @handleDetail="handleDetail"></home-list>
+      </div>
+      <div class="home-list-wrapper">
+        <div
+          class="home-list"
+          v-for="item in homeCategory"
+          :key="item.data.floor_id"
+        >
+          <h2 class="title">{{ item.data.title }}</h2>
+          <home-list :list="item.data" @handleDetail="handleDetail"></home-list>
+        </div>
+      </div>
+    </van-pull-refresh>
   </div>
 </template>
 
 <script>
-import { Swipe, SwipeItem, Toast } from "vant";
+import { Swipe, SwipeItem, Toast, PullRefresh } from "vant";
 import HomePage from "../api/home.js";
 import HomeList from "../components/HomeList";
 export default {
@@ -50,7 +52,8 @@ export default {
     HomeList,
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem,
-    [Toast.name]: Toast
+    [Toast.name]: Toast,
+    [PullRefresh.name]: PullRefresh
   },
   props: {},
   data() {
@@ -58,15 +61,24 @@ export default {
       banners: [],
       recommend: {},
       newProduct: {},
-      homeCategory: []
+      homeCategory: [],
+      isLoading: false
     };
   },
   watch: {},
   computed: {},
   methods: {
+    async onRefresh() {
+      await this.getBanner();
+      this.$toast({
+        message: "刷新成功",
+        type: "success",
+        duration: 1000
+      });
+      this.isLoading = false;
+    },
     async getBanner() {
       const res = await HomePage.fetchHomePage();
-      this.$toast.clear();
       let homepage = res.data.homepage.floors;
       // let selfRecommend = res.data.recommend.floors;
       let homeCategory = [];
