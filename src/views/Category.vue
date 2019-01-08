@@ -76,6 +76,7 @@ export default {
   watch: {},
   computed: {},
   methods: {
+    onClickRight() {},
     async getCategory() {
       const res = await HomePage.fetchCategory();
       this.setCategory(res);

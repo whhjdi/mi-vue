@@ -14,11 +14,11 @@
             <use
               :xlink:href="nav.link == $route.name ? nav.iconon : nav.icon"
             ></use></svg
-          ><span>{{ nav.name }}</span></router-link
+          ><span>{{ nav.name }}</span>
+          <div class="info" v-show="nav.link == 'cart' && count">
+            <span>{{ count }}</span>
+          </div></router-link
         >
-      </div>
-      <div class="info" v-show="count">
-        <span>{{ count }}</span>
       </div>
     </div>
   </transition>
@@ -93,6 +93,7 @@ export default {
       align-items: center;
       flex: 1 1 auto;
       font-size: 14px;
+      position: relative;
       &.on {
         color: #855a30;
       }
@@ -101,21 +102,21 @@ export default {
         width: 20px;
         height: 20px;
       }
+      .info {
+        position: absolute;
+        top: -8px;
+        right: 30px;
+        z-index: 99;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        background-color: #f44;
+        color: #fff;
+        padding: 2px;
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+      }
     }
-  }
-  .info {
-    position: absolute;
-    top: 0;
-    right: 120px;
-    z-index: 99;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    background-color: #f44;
-    color: #fff;
-    padding: 2px;
-    width: 14px;
-    height: 14px;
-    font-size: 14px;
   }
 }
 .fade-enter-active,

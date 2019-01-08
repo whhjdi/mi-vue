@@ -252,7 +252,6 @@ export default {
         curOption.list[curIndex].isOn = true;
       });
       this.buyOption = buyOption;
-      console.log(this.selectedGood);
     },
     addToCart() {
       //加入购物车

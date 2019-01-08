@@ -64,9 +64,7 @@
         <div class="flex">
           <div class="info">
             <span class="mr1x">{{ areaData }}</span>
-            <!-- <span class="on">{{
-              deliveryData.datas.length ? "有现货" : "无现货"
-            }}</span> -->
+            <span class="on">{{ stock_status }}</span>
           </div>
         </div>
       </div>

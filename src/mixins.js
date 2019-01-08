@@ -15,8 +15,7 @@ const titleNavBarMinxin = {
   methods: {
     onClickLeft() {
       this.$router.go(-1);
-    },
-    onClickRight() {}
+    }
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {

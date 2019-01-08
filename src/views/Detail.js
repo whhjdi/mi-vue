@@ -53,7 +53,8 @@ export default {
           code: "110101",
           name: "东城区"
         }
-      ]
+      ],
+      stock_status: "无货"
     };
   },
   watch: {},
@@ -124,13 +125,19 @@ export default {
     },
     confirmArea(arr) {
       this.deliveryData = arr;
+      this.getEstDelivery(arr);
       this.showAddressPop = false;
     },
     cancelArea() {
       this.showAddressPop = false;
+    },
+    async getEstDelivery(delivary) {
+      const res = await HomePage.fetchEstDelivery(delivary);
+      this.stock_status = res.data.stock_status;
     }
   },
   created() {
     this.getProductView(this.$route.params.id);
+    this.getEstDelivery(this.delivaryData);
   }
 };

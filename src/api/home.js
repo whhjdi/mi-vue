@@ -13,6 +13,11 @@ class HomePage {
       }
     });
   }
+  static fetchEstDelivery() {
+    return fetchData("estDelivery", {
+      params: {}
+    });
+  }
 }
 
 export default HomePage;

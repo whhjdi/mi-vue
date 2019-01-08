@@ -4,6 +4,7 @@ const urls = {
   homePage: "/homePage",
   category: "/category",
   productView: "/product/productView",
+  estDelivery: "/product/estDelivery",
   // 购物车
   cart: "/cart/index",
   cartEdit: "/cart/edit",

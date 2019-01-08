@@ -97,21 +97,10 @@ export default {
   props: {},
   data() {
     return {
-      // allChecked: false,
-      items: {}
+      items: []
     };
   },
-  watch: {
-    // allChecked(newVal) {
-    //   this.items.forEach(item => {
-    //     if (newVal) {
-    //       item.sel_status = true;
-    //     } else {
-    //       item.sel_status = false;
-    //     }
-    //   });
-    // }
-  },
+  watch: {},
   computed: {
     allPrice() {
       let price = 0;
@@ -175,7 +164,22 @@ export default {
       });
       this.items.splice(index, 1);
     },
-    onSubmit() {},
+    //提交订单
+    onSubmit() {
+      let goods = [];
+      this.items.forEach(item => {
+        if (item.sel_status) {
+          goods.push(item);
+        }
+      });
+      this.$router.push({
+        name: "orderCheckout",
+        params: {
+          goods
+        }
+      });
+    },
+    onClickRight() {},
     async getCart() {
       const res = await Cart.fetchCart();
       this.setCart(res);
