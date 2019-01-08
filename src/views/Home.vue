@@ -2,7 +2,12 @@
   <div class="home">
     <div class="nav-bar">
       <div class="title" slot="left">沐雪商城</div>
-      <input placeholder="搜一搜" class="input" />
+      <input
+        placeholder="搜一搜"
+        class="input"
+        readonly
+        @click="handleSearch"
+      />
       <van-icon name="fire" size="24px" class="nav-icon"></van-icon>
     </div>
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
@@ -114,6 +119,9 @@ export default {
           id
         }
       });
+    },
+    handleSearch() {
+      console.log(1);
     }
   },
   created() {
