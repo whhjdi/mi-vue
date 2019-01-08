@@ -11,7 +11,9 @@ const urls = {
   cartSelCart: "/cart/selcart",
   cartDel: "/cart/del",
   cartClear: "/cart/clear",
-  cartCount: "/cart/count"
+  cartCount: "/cart/count",
+  //地址
+  addressList: "/address/list"
 };
 
 for (let key in urls) {

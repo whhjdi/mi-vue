@@ -10,6 +10,12 @@
         <van-icon name="wap-home" slot="right" color="#000" size="20px" />
       </van-nav-bar>
     </van-popup>
+    <router-link
+      :to="{ name: 'addressList' }"
+      :style="{ marginTop: '100px' }"
+      tag="div"
+      >qwe</router-link
+    >
   </div>
 </template>
 

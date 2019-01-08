@@ -1,5 +1,7 @@
 <template>
-  <div id="app"><router-view /> <the-footer></the-footer></div>
+  <div id="app">
+    <keep-alive><router-view /></keep-alive> <the-footer></the-footer>
+  </div>
 </template>
 <script>
 import TheFooter from "./components/TheFooter";
