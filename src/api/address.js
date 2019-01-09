@@ -6,6 +6,13 @@ class Address {
   static fetchCheckout() {
     return fetchData("checkout");
   }
+  static fetchOrderList(type) {
+    return fetchData("orderList", {
+      params: {
+        type
+      }
+    });
+  }
 }
 
 export default Address;

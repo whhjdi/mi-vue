@@ -15,7 +15,8 @@ const urls = {
   //地址
   addressList: "/address/list",
   //订单
-  checkout: "/checkout"
+  checkout: "/checkout",
+  orderList: "/order/list"
 };
 
 for (let key in urls) {
