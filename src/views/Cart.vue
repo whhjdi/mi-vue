@@ -107,7 +107,9 @@ export default {
       let price = 0;
       if (this.items.length > 0) {
         this.items.forEach(item => {
-          price += item.price * item.num;
+          if (item.sel_status) {
+            price += item.price * item.num;
+          }
         });
       }
       return price * 100;
