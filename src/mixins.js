@@ -17,15 +17,21 @@ const titleNavBarMixin = {
       this.$router.go(-1);
     }
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.showNavBar = true;
-    });
+  activated() {
+    this.showNavBar = true;
   },
-  beforeRouteLeave(to, from, next) {
+  deactivated() {
     this.showNavBar = false;
-    next();
   }
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm => {
+  //     vm.showNavBar = true;
+  //   });
+  // },
+  // beforeRouteLeave(to, from, next) {
+  //   this.showNavBar = false;
+  //   next();
+  // }
 };
 const setFooterMixin = {
   components: {
@@ -37,15 +43,21 @@ const setFooterMixin = {
       setShowFooter: "SET_SHOW_FOOTER"
     })
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.setShowFooter(false);
-    });
+  activated() {
+    this.setShowFooter(false);
   },
-  beforeRouteLeave(to, from, next) {
+  deactivated() {
     this.setShowFooter(true);
-    next();
   }
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm => {
+  //     vm.setShowFooter(false);
+  //   });
+  // },
+  // beforeRouteLeave(to, from, next) {
+  //   this.setShowFooter(true);
+  //   next();
+  // }
 };
 
-export { titleNavBarMixin, setFooterMixin};
+export { titleNavBarMixin, setFooterMixin };

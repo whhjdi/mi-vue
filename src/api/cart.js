@@ -18,9 +18,6 @@ class Cart {
   static fetchCartCount() {
     return fetchData("cartCount");
   }
-  static fetchCheckout() {
-    return fetchData("checkout");
-  }
 }
 
 export default Cart;

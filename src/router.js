@@ -46,6 +46,12 @@ export default new Router({
         import(/* webpackChunkName: "OrderCheckout" */ "./views/OrderCheckout.vue")
     },
     {
+      path: "/order/list",
+      name: "orderList",
+      component: () =>
+        import(/* webpackChunkName: "OrderList" */ "./views/OrderList.vue")
+    },
+    {
       path: "/address/list",
       name: "addressList",
       component: () =>
