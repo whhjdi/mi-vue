@@ -53,6 +53,7 @@
 import Address from "../api/address.js";
 import { titleNavBarMixin, setFooterMixin } from "../mixins.js";
 import { Tab, Tabs } from "vant";
+import { mapGetters } from "vuex";
 export default {
   name: "orderList",
   // eslint-disable-next-line
@@ -81,7 +82,9 @@ export default {
     };
   },
   watch: {},
-  computed: {},
+  computed: {
+    ...mapGetters(["isLogin"])
+  },
   methods: {
     handleClick(index) {
       this.getOrderList(index + 1);
@@ -96,6 +99,15 @@ export default {
     onClickRight() {
       console.log("search");
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (!vm.isLogin) {
+        vm.$router.push({
+          name: "login"
+        });
+      }
+    });
   },
   created() {
     this.getOrderList(1);

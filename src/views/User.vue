@@ -16,19 +16,20 @@
         <van-icon name="arrow"></van-icon>
       </div>
     </div>
-    <div class="logout" @click="userLogout">退出登录</div>
-    <router-view></router-view>
+    <van-cell title="我的订单" is-link :to="{ name: 'orderList' }" border />
+    <div class="logout" @click="userLogout" v-show="isLogin">退出登录</div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import { Icon } from "vant";
+import { Icon, Cell } from "vant";
 import User from "../api/user.js";
 export default {
   name: "",
   components: {
-    [Icon.name]: Icon
+    [Icon.name]: Icon,
+    [Cell.name]: Cell
   },
   props: {},
   data() {
