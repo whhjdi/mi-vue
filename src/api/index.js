@@ -16,7 +16,12 @@ const urls = {
   addressList: "/address/list",
   //订单
   checkout: "/checkout",
-  orderList: "/order/list"
+  orderList: "/order/list",
+  //用户
+  info: "/user/info",
+  login: "/user/login",
+  logout: "/user/logout",
+  code: "/user/code"
 };
 
 for (let key in urls) {

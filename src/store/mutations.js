@@ -5,6 +5,9 @@ const mutations = {
   },
   [types.SET_COUNT](state, num) {
     state.count = num;
+  },
+  [types.SET_IS_LOGIN](state, flag) {
+    state.isLogin = flag;
   }
 };
 export default mutations;

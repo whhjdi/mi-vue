@@ -62,6 +62,12 @@ export default new Router({
       name: "addressEdit",
       component: () =>
         import(/* webpackChunkName: "addressEdit" */ "./views/AddressEdit.vue")
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () =>
+        import(/* webpackChunkName: "Login" */ "./views/Login.vue")
     }
   ]
 });

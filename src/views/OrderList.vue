@@ -51,13 +51,14 @@
 
 <script>
 import Address from "../api/address.js";
-import { titleNavBarMixin } from "../mixins.js";
+import { titleNavBarMixin, setFooterMixin } from "../mixins.js";
 import { Tab, Tabs } from "vant";
 export default {
   name: "orderList",
+  // eslint-disable-next-line
   components: { [Tab.name]: Tab, [Tabs.name]: Tabs },
   props: {},
-  mixins: [titleNavBarMixin],
+  mixins: [titleNavBarMixin, setFooterMixin],
   data() {
     return {
       orderList: [],

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "babel-plugin-import": "^1.11.0",
+    "blueimp-md5": "^2.10.0",
     "lib-flexible": "^0.3.2",
     "normalize.css": "^8.0.1",
     "postcss-pxtorem": "^4.0.1",
