@@ -1,3 +1,3 @@
-module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/shop-vue/dist/" : "/"
-};
+// module.exports = {
+//   publicPath: process.env.NODE_ENV === "production" ? "/shop-vue/dist/" : "/"
+// };
