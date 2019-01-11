@@ -112,12 +112,8 @@ export default {
     },
     async getUserInfo(code) {
       const res = await User.fetchInfo(code);
-      console.log(res.data);
       let user = res.data.user;
-      let send_order = res.data.send_order;
-      let unpaid_order = res.data.unpaid_order;
-      let data = { user, send_order, unpaid_order };
-      this.setUserInfo(data);
+      this.setUserInfo(user);
       let path = this.$route.query.redirect || "/user";
       this.$router.push(path);
     },

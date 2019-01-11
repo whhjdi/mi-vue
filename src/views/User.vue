@@ -2,12 +2,10 @@
   <div class="user">
     <div class="header">
       <div class="isLogin" v-if="isLogin">
-        <div class="userImg">
-          <img v-lazy="userInfo.user.user_img" alt="" />
-        </div>
+        <div class="userImg"><img :src="userInfo.user_img" alt="" /></div>
         <div class="content">
-          <div class="userName">{{ userInfo.user.user_name }}</div>
-          <div class="userId">{{ userInfo.user.user_id }}</div>
+          <div class="userName">{{ userInfo.user_name }}</div>
+          <div class="userId">{{ userInfo.user_id }}</div>
         </div>
       </div>
       <div class="noLogin" v-else @click="userLogin">
@@ -77,7 +75,7 @@ import { mapGetters, mapMutations } from "vuex";
 import { Icon, Cell, Dialog } from "vant";
 import User from "../api/user.js";
 export default {
-  name: "",
+  name: "user",
   components: {
     [Icon.name]: Icon,
     [Cell.name]: Cell,
@@ -93,7 +91,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setIsLogin: "SET_IS_LOGIN"
+      setIsLogin: "SET_IS_LOGIN",
+      setUserInfo: "SET_USER_INFO"
     }),
     userLogin() {
       this.$router.push({
@@ -108,6 +107,7 @@ export default {
         .then(() => {
           User.fetchLogout().then(() => {
             this.setIsLogin(false);
+            this.setUserInfo({});
           });
         })
         .catch(() => {
@@ -196,6 +196,7 @@ export default {
     .item {
       flex: 1;
       color: #865c30;
+      position: relative;
       .icon {
         margin-bottom: 2px;
       }
