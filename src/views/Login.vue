@@ -98,7 +98,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setIsLogin: "SET_IS_LOGIN"
+      setIsLogin: "SET_IS_LOGIN",
+      setUserInfo: "SET_USER_INFO"
     }),
     async login(data) {
       const res = await User.fetchLogin(data);
@@ -115,12 +116,8 @@ export default {
       let send_order = res.data.send_order;
       let unpaid_order = res.data.unpaid_order;
       let data = { user, send_order, unpaid_order };
-      this.$router.push({
-        name: "user",
-        params: {
-          data
-        }
-      });
+      this.setUserInfo(data);
+      this.$router.go(-1);
     },
     toggleOpen() {
       this.isOpen = !this.isOpen;

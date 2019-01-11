@@ -8,6 +8,9 @@ const mutations = {
   },
   [types.SET_IS_LOGIN](state, flag) {
     state.isLogin = flag;
+  },
+  [types.SET_USER_INFO](state, data) {
+    state.userInfo = data;
   }
 };
 export default mutations;

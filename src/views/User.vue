@@ -2,10 +2,12 @@
   <div class="user">
     <div class="header">
       <div class="isLogin" v-if="isLogin">
-        <div class="userImg"><img v-lazy="user.user_img" alt="" /></div>
+        <div class="userImg">
+          <img v-lazy="userInfo.user.user_img" alt="" />
+        </div>
         <div class="content">
-          <div class="userName">{{ user.user_name }}</div>
-          <div class="userId">{{ user.user_id }}</div>
+          <div class="userName">{{ userInfo.user.user_name }}</div>
+          <div class="userId">{{ userInfo.user.user_id }}</div>
         </div>
       </div>
       <div class="noLogin" v-else @click="userLogin">
@@ -16,34 +18,78 @@
         <van-icon name="arrow"></van-icon>
       </div>
     </div>
-    <van-cell title="我的订单" is-link :to="{ name: 'orderList' }" border />
+    <van-cell
+      title="我的订单"
+      is-link
+      :to="{ name: 'orderList' }"
+      class="order-title"
+    />
+    <div class="list">
+      <div class="item">
+        <van-icon
+          name="balance-pay"
+          @click="toOrderList(2)"
+          size="20px"
+          class="icon"
+        ></van-icon>
+        <div class="text">待付款</div>
+      </div>
+      <div class="item">
+        <van-icon
+          name="logistics"
+          @click="toOrderList(3)"
+          size="20px"
+          class="icon"
+        ></van-icon>
+        <div class="text">待收货</div>
+      </div>
+      <div class="item">
+        <van-icon
+          name="passed"
+          @click="toOrderList(4)"
+          size="20px"
+          class="icon"
+        ></van-icon>
+        <div class="text">待评价</div>
+      </div>
+      <div class="item">
+        <van-icon
+          name="balance-list-o"
+          @click="toOrderList(5)"
+          size="20px"
+          class="icon"
+        ></van-icon>
+        <div class="text">退款订单</div>
+      </div>
+    </div>
+    <div class="about">
+      <van-cell title="查看源码" icon="fire" is-link />
+      <van-cell title="在线预览" icon="hot" is-link />
+      <van-cell title="我的博客" icon="point-gift" is-link />
+      <van-cell title="我的简历" icon="like" is-link />
+    </div>
     <div class="logout" @click="userLogout" v-show="isLogin">退出登录</div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import { Icon, Cell } from "vant";
+import { Icon, Cell, Dialog } from "vant";
 import User from "../api/user.js";
 export default {
   name: "",
   components: {
     [Icon.name]: Icon,
-    [Cell.name]: Cell
+    [Cell.name]: Cell,
+    [Dialog.name]: Dialog
   },
   props: {},
   data() {
-    return {
-      userName: "",
-      password: "",
-      user: {},
-      send_order: 0,
-      unpaid_order: 0
-    };
+    return {};
   },
   watch: {},
   computed: {
-    ...mapGetters(["isLogin"])
+    ...mapGetters(["isLogin", "userInfo"])
   },
   methods: {
     ...mapMutations({
@@ -55,19 +101,26 @@ export default {
       });
     },
     async userLogout() {
-      await User.fetchLogout();
-      this.setIsLogin(false);
-    }
-  },
-  beforeRouteEnter(to, from, next) {
-    if (from.name === "login") {
-      next(vm => {
-        vm.user = vm.$route.params.data.user;
-        vm.send_order = vm.$route.params.data.send_order;
-        vm.unpaid_order = vm.$route.params.data.user;
+      Dialog.confirm({
+        title: "提示",
+        message: "确定要退出当前账号吗"
+      })
+        .then(() => {
+          User.fetchLogout().then(() => {
+            this.setIsLogin(false);
+          });
+        })
+        .catch(() => {
+          // on cancel
+        });
+    },
+    toOrderList(type) {
+      this.$router.push({
+        name: "orderList",
+        params: {
+          type
+        }
       });
-    } else {
-      next();
     }
   },
   created() {},
@@ -76,6 +129,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .user {
+  background: #f3f3f3;
+  height: 100vh;
   .header {
     height: 100px;
     background-color: transparent;
@@ -108,8 +163,6 @@ export default {
           color: #c2c2c2;
         }
       }
-      .logout {
-      }
     }
     .noLogin {
       height: 100%;
@@ -129,6 +182,35 @@ export default {
         }
       }
     }
+  }
+  .order-title {
+    text-align: left;
+  }
+  .list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    margin-bottom: 20px;
+    .item {
+      flex: 1;
+      color: #865c30;
+      .icon {
+        margin-bottom: 2px;
+      }
+      .text {
+        font-size: 14px;
+      }
+    }
+  }
+  .about {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  .logout {
+    background: #fff;
+    padding: 10px;
   }
 }
 </style>

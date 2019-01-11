@@ -77,11 +77,24 @@ export default {
         {
           type: 3,
           name: "待收货"
+        },
+        {
+          type: 4,
+          name: "待评价"
+        },
+        {
+          type: 5,
+          name: "退款订单"
         }
       ]
     };
   },
-  watch: {},
+  watch: {
+    type(newVal) {
+      this.active = newVal - 1;
+      this.getOrderList(newVal);
+    }
+  },
   computed: {
     ...mapGetters(["isLogin"])
   },
@@ -96,6 +109,9 @@ export default {
     setOrderList(res) {
       this.orderList = res.data.list;
     },
+    onClickLeft() {
+      this.$router.push("/user");
+    },
     onClickRight() {
       console.log("search");
     }
@@ -109,8 +125,11 @@ export default {
       }
     });
   },
+  activated() {
+    this.type = this.$route.params.type;
+  },
   created() {
-    this.getOrderList(1);
+    this.getOrderList(this.type);
   },
   mounted() {}
 };
