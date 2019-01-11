@@ -83,7 +83,7 @@
 
 <script>
 import { titleNavBarMixin, setFooterMixin } from "../mixins.js";
-import { Card, Button, Stepper, Checkbox, Toast } from "vant";
+import { Card, Button, Stepper, Checkbox, Toast, Dialog } from "vant";
 import Cart from "../api/cart.js";
 import { mapGetters } from "vuex";
 export default {
@@ -93,7 +93,8 @@ export default {
     [Button.name]: Button,
     [Stepper.name]: Stepper,
     [Checkbox.name]: Checkbox,
-    [Toast.name]: Toast
+    [Toast.name]: Toast,
+    [Dialog.name]: Dialog
   },
   mixins: [titleNavBarMixin, setFooterMixin],
   props: {},
@@ -176,9 +177,21 @@ export default {
         return;
       }
       if (!this.isLogin) {
-        this.$router.push({
-          name: "login"
-        });
+        Dialog.confirm({
+          title: "提示",
+          message: "您还未登录，即将为您跳转到登录页面"
+        })
+          .then(() => {
+            this.$router.push({
+              name: "login",
+              query: {
+                redirect: "/cart"
+              }
+            });
+          })
+          .catch(() => {
+            // on cancel
+          });
         return;
       }
       let goods = [];

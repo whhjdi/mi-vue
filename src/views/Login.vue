@@ -58,7 +58,7 @@ import User from "../api/user.js";
 import { setFooterMixin } from "../mixins.js";
 import { Field, Button, Icon } from "vant";
 import md5 from "blueimp-md5";
-import { mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     [Field.name]: Field,
@@ -83,6 +83,7 @@ export default {
   },
   watch: {},
   computed: {
+    ...mapGetters(["isLogin"]),
     placeholderText() {
       return this.isSmsLogin ? "手机号码" : "邮箱/手机号码";
     },
@@ -117,7 +118,8 @@ export default {
       let unpaid_order = res.data.unpaid_order;
       let data = { user, send_order, unpaid_order };
       this.setUserInfo(data);
-      this.$router.go(-1);
+      let path = this.$route.query.redirect || "/user";
+      this.$router.push(path);
     },
     toggleOpen() {
       this.isOpen = !this.isOpen;
@@ -194,6 +196,13 @@ export default {
       }
       this.login(data);
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (vm.isLogin) {
+        vm.$router.go(-1);
+      }
+    });
   },
   created() {},
   mounted() {}
