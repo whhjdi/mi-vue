@@ -1,6 +1,7 @@
 import { NavBar, Popup, Icon, Toast } from "vant";
 import { mapMutations } from "vuex";
 import { SubmitBar, Checkbox } from "vant";
+import { mapGetters } from "vuex";
 const titleNavBarMixin = {
   data() {
     return {
@@ -49,15 +50,6 @@ const setFooterMixin = {
   deactivated() {
     this.setShowFooter(true);
   }
-  // beforeRouteEnter(to, from, next) {
-  //   next(vm => {
-  //     vm.setShowFooter(false);
-  //   });
-  // },
-  // beforeRouteLeave(to, from, next) {
-  //   this.setShowFooter(true);
-  //   next();
-  // }
 };
 
 export { titleNavBarMixin, setFooterMixin };

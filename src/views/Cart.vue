@@ -85,6 +85,7 @@
 import { titleNavBarMixin, setFooterMixin } from "../mixins.js";
 import { Card, Button, Stepper, Checkbox, Toast } from "vant";
 import Cart from "../api/cart.js";
+import { mapGetters } from "vuex";
 export default {
   name: "cart",
   components: {
@@ -103,6 +104,7 @@ export default {
   },
   watch: {},
   computed: {
+    ...mapGetters(["isLogin"]),
     allPrice() {
       let price = 0;
       if (this.items.length > 0) {
@@ -171,6 +173,12 @@ export default {
     onSubmit() {
       if (this.items.length === 0) {
         Toast("先买的东西吧，客官");
+        return;
+      }
+      if (!this.isLogin) {
+        this.$router.push({
+          name: "login"
+        });
         return;
       }
       let goods = [];
