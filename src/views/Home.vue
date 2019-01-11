@@ -142,6 +142,11 @@ export default {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   .nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
     background: #fff;
     display: flex;
     justify-content: flex-start;
@@ -169,6 +174,7 @@ export default {
   }
   .banner {
     width: 100%;
+    margin-top: 40px;
   }
   .recommend {
     background: #fff;

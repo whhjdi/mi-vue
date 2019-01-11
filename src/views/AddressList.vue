@@ -66,6 +66,11 @@ export default {
         }
       });
     },
+    onClickLeft() {
+      this.$router.push({
+        name: "orderCheckout"
+      });
+    },
     onClickRight() {
       this.$router.push({
         name: "home"
@@ -111,6 +116,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .address {
+  position: fixed;
+  top: 0;
+  bottom: 60px;
+  left: 0;
+  right: 0;
   .content {
     margin-top: 46px;
   }

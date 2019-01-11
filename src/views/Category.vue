@@ -124,6 +124,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .category {
+  position: fixed;
+  top: 0;
+  bottom: 60px;
+  left: 0;
+  right: 0;
   .van-nav-bar {
     height: 50px;
   }

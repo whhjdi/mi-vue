@@ -160,7 +160,11 @@ export default {
 <style lang="scss" scoped>
 .checkout {
   background: #f3f3f3;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  bottom: 60px;
+  left: 0;
+  right: 0;
   .address {
     margin-top: 46px;
     text-align: left;

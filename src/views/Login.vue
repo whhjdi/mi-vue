@@ -1,56 +1,66 @@
 <template>
-  <div class="login">
-    <van-field
-      v-model.trim="username"
-      :placeholder="placeholderText"
-      left-icon="contact"
-      class="user-name"
-      :error-message="errMsg"
-      clearable
-    />
-    <van-field
-      v-model.trim="password"
-      placeholder="请输入密码"
-      left-icon="smile-o"
-      v-show="!isSmsLogin"
-      class="user-psd"
-      :type="psdType"
-      clearable
-      :error-message="errMsg2"
-    >
-      <van-icon
-        :name="isOpen ? 'eye-o' : 'closed-eye'"
-        slot="icon"
-        @click="toggleOpen"
-      ></van-icon>
-    </van-field>
-    <van-field
-      v-model="code"
-      placeholder="请输入验证码"
-      left-icon="smile-o"
-      v-show="isSmsLogin"
-      class="sms-code"
-      clearable
-      :error-message="errMsg2"
-    >
-      <van-button slot="button" size="small" type="danger" @click="getCode">{{
-        codeMsg
-      }}</van-button>
-    </van-field>
-    <van-button
-      :type="isSmsLogin ? 'warning' : 'primary'"
-      class="main-btn"
-      @click="submit"
-      :loading="isLoading"
-      >{{ mainBtn }}</van-button
-    >
-    <van-button
-      type="default"
-      @click="isSmsLogin = !isSmsLogin"
-      class="sub-btn"
-      >{{ subBtn }}</van-button
-    >
-  </div>
+  <transition name="login">
+    <div class="login">
+      <header class="header">
+        <img
+          src="https://i.loli.net/2019/01/11/5c387009b68f6.png"
+          alt=""
+          class="img"
+        />
+        <div class="title">沐雪商城</div>
+      </header>
+      <van-field
+        v-model.trim="username"
+        :placeholder="placeholderText"
+        left-icon="contact"
+        class="user-name"
+        :error-message="errMsg"
+        clearable
+      />
+      <van-field
+        v-model.trim="password"
+        placeholder="请输入密码"
+        left-icon="smile-o"
+        v-show="!isSmsLogin"
+        class="user-psd"
+        :type="psdType"
+        clearable
+        :error-message="errMsg2"
+      >
+        <van-icon
+          :name="isOpen ? 'eye-o' : 'closed-eye'"
+          slot="icon"
+          @click="toggleOpen"
+        ></van-icon>
+      </van-field>
+      <van-field
+        v-model="code"
+        placeholder="请输入验证码"
+        left-icon="smile-o"
+        v-show="isSmsLogin"
+        class="sms-code"
+        clearable
+        :error-message="errMsg2"
+      >
+        <van-button slot="button" size="small" type="danger" @click="getCode">{{
+          codeMsg
+        }}</van-button>
+      </van-field>
+      <van-button
+        :type="isSmsLogin ? 'warning' : 'primary'"
+        class="main-btn"
+        @click="submit"
+        :loading="isLoading"
+        >{{ mainBtn }}</van-button
+      >
+      <van-button
+        type="default"
+        @click="isSmsLogin = !isSmsLogin"
+        class="sub-btn"
+        >{{ subBtn }}</van-button
+      >
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -206,10 +216,30 @@ export default {
 </script>
 <style lang="scss" scoped>
 .login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 20px;
+  &.login-enter-active,
+  &.login-leave-active {
+    transition: all 500ms;
+  }
+  &.login-enter,
+  &.login-leave-to {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  .header {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    .img {
+      width: 100px;
+    }
+  }
   .user-name {
     margin-bottom: 10px;
   }

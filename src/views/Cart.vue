@@ -237,11 +237,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .cart {
+  position: fixed;
+  top: 0;
+  bottom: 60px;
+  left: 0;
+  right: 0;
   .content {
-    position: fixed;
-    top: 50px;
-    bottom: 50px;
-    width: 100%;
+    margin-top: 50px;
     overflow-y: scroll;
     .list {
       .list-item {

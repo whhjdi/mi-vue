@@ -135,48 +135,55 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.content {
-  margin-top: 46px;
-  .list {
-    background: #ececec;
-    .item {
-      background: #fff;
-      padding: 10px;
-      margin-bottom: 10px;
-      .title {
-        text-align: left;
-        position: relative;
+.order-list {
+  position: fixed;
+  top: 0;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  .content {
+    margin-top: 46px;
+    .list {
+      background: #ececec;
+      .item {
+        background: #fff;
         padding: 10px;
-        font-size: 14px;
-        line-height: 20px;
-        .info {
-          position: absolute;
-          right: 20px;
-          top: 10px;
-          color: #865c30;
-        }
-        .addTime {
-          color: #777;
-        }
-      }
-      .good-list {
-        padding: 5px;
-        border-top: 1px solid #ddd;
-        .good-item {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          .good-name {
-            flex: 1;
-            margin-right: 10px;
-            font-size: 14px;
+        margin-bottom: 10px;
+        .title {
+          text-align: left;
+          position: relative;
+          padding: 10px;
+          font-size: 14px;
+          line-height: 20px;
+          .info {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            color: #865c30;
+          }
+          .addTime {
+            color: #777;
           }
         }
-      }
-      .total {
-        text-align: right;
-        font-size: 14px;
-        color: #865c30;
+        .good-list {
+          padding: 5px;
+          border-top: 1px solid #ddd;
+          .good-item {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .good-name {
+              flex: 1;
+              margin-right: 10px;
+              font-size: 14px;
+            }
+          }
+        }
+        .total {
+          text-align: right;
+          font-size: 14px;
+          color: #865c30;
+        }
       }
     }
   }
