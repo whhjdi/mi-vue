@@ -159,11 +159,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .checkout {
+  background: #f3f3f3;
+  height: 100vh;
   .address {
     margin-top: 46px;
     text-align: left;
   }
   .b2 {
+    background: #fff;
     .list-wrapper {
       margin-top: 20px;
       overflow: hidden;
@@ -256,8 +259,9 @@ export default {
   }
   .b3 {
     margin-top: 20px;
+    background: #fff;
     .list {
-      padding: 10px;
+      padding: 10px 10px 0 10px;
       .item {
         display: flex;
         justify-content: flex-start;

@@ -17,7 +17,7 @@
         </van-swipe-item>
       </van-swipe>
       <div class="recommend">
-        <h2 class="title">{{ recommend.title }}</h2>
+        <h3 class="title">{{ recommend.title }}</h3>
         <ul class="list-wrapper">
           <li
             v-for="(item, index) in recommend.items"
@@ -44,7 +44,7 @@
           v-for="item in homeCategory"
           :key="item.data.floor_id"
         >
-          <h2 class="title">{{ item.data.title }}</h2>
+          <h3 class="title">{{ item.data.title }}</h3>
           <home-list :list="item.data" @handleDetail="handleDetail"></home-list>
         </div>
       </div>
@@ -138,10 +138,11 @@ export default {
   left: 0;
   right: -8px;
   padding: 0 8px 8px 0;
-  background: #fefefe;
+  background: #f3f3f3;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   .nav-bar {
+    background: #fff;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -170,7 +171,9 @@ export default {
     width: 100%;
   }
   .recommend {
+    background: #fff;
     margin-bottom: 10px;
+    padding: 10px 5px;
     .list-wrapper {
       box-sizing: border-box;
       display: flex;
@@ -178,6 +181,7 @@ export default {
       align-items: center;
       flex-wrap: wrap;
       padding: 0 1%;
+      background: #fff;
       .list-item {
         width: 48%;
         margin-bottom: 5px;
@@ -201,6 +205,17 @@ export default {
           margin: 10px 0;
         }
       }
+    }
+  }
+  .newProduct-wrapper {
+    background: #fff;
+    margin-bottom: 10px;
+  }
+  .home-list-wrapper {
+    .home-list {
+      padding: 10px 5px;
+      margin-bottom: 10px;
+      background: #fff;
     }
   }
 }
