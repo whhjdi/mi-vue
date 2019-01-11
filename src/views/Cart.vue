@@ -136,8 +136,18 @@ export default {
   },
   methods: {
     async clearCart() {
-      await Cart.fetchCartClear();
-      this.items = [];
+      Dialog.confirm({
+        title: "提示",
+        message: "您确定要清空购物车吗"
+      })
+        .then(() => {
+          Cart.fetchCartClear().then(() => {
+            this.items = [];
+          });
+        })
+        .catch(() => {
+          // on cancel
+        });
     },
     plusCount(item) {
       this.cartEdit(item, 1);
