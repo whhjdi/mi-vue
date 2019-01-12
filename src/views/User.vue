@@ -2,7 +2,7 @@
   <div class="user">
     <div class="header">
       <div class="isLogin" v-if="isLogin">
-        <div class="userImg"><img :src="userInfo.user_img" alt="" /></div>
+        <div class="userImg"><img :src="userInfo.user_img" alt /></div>
         <div class="content">
           <div class="userName">{{ userInfo.user_name }}</div>
           <div class="userId">{{ userInfo.user_id }}</div>
@@ -61,10 +61,30 @@
       </div>
     </div>
     <div class="about">
-      <van-cell title="查看源码" icon="fire" is-link />
-      <van-cell title="在线预览" icon="hot" is-link />
-      <van-cell title="我的博客" icon="point-gift" is-link />
-      <van-cell title="我的简历" icon="like" is-link />
+      <van-cell
+        title="查看源码"
+        icon="fire"
+        is-link
+        url="https://github.com/whhjdi/shop-vue"
+      />
+      <van-cell
+        title="在线预览"
+        icon="hot"
+        is-link
+        url="http://wanghandi.top/shop-vue/dist/#/home"
+      />
+      <van-cell
+        title="我的博客"
+        icon="point-gift"
+        is-link
+        url="http://wanghandi.top"
+      />
+      <van-cell
+        title="我的简历"
+        icon="like"
+        is-link
+        url="http://wanghandi.top/my-cv/dist/#/home"
+      />
     </div>
     <div class="logout" @click="userLogout" v-show="isLogin">退出登录</div>
   </div>
