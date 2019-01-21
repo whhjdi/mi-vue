@@ -43,7 +43,7 @@
         <li v-for="(item, index) in cartList" :key="index" class="item">
           <img
             v-lazy="item.image_url"
-            alt=""
+            alt
             class="item-img"
             style="width:50px"
           />
@@ -108,17 +108,16 @@ export default {
     ...mapMutations({
       setShowFooter: "SET_SHOW_FOOTER"
     }),
-    onPay() {
-      Dialog.alert({
-        title: "支付",
-        message: "支付成功,确认进入订单"
-      })
-        .then(() => {
-          this.$router.push({ name: "orderList" });
-        })
-        .catch(() => {
-          // on cancel
+    async onPay() {
+      try {
+        await Dialog.alert({
+          title: "支付",
+          message: "支付成功,确认进入订单"
         });
+        this.$router.push({ name: "orderList" });
+      } catch (error) {
+        console.error(error);
+      }
     },
     chosePay(index) {
       this.payMethod.forEach((pay, i) => {
