@@ -120,19 +120,17 @@ export default {
       });
     },
     async userLogout() {
-      Dialog.confirm({
-        title: "提示",
-        message: "确定要退出当前账号吗"
-      })
-        .then(() => {
-          User.fetchLogout().then(() => {
-            this.setIsLogin(false);
-            this.setUserInfo({});
-          });
-        })
-        .catch(() => {
-          // on cancel
+      try {
+        await Dialog.confirm({
+          title: "提示",
+          message: "确定要退出当前账号吗"
         });
+        await User.fetchLogout();
+        this.setIsLogin(false);
+        this.setUserInfo({});
+      } catch (error) {
+        console.error(error);
+      }
     },
     toOrderList(type) {
       this.$router.push({
