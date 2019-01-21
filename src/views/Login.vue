@@ -4,7 +4,7 @@
       <header class="header">
         <img
           src="https://i.loli.net/2019/01/11/5c387009b68f6.png"
-          alt=""
+          alt
           class="img"
         />
         <div class="title">沐雪商城</div>
@@ -42,9 +42,9 @@
         clearable
         :error-message="errMsg2"
       >
-        <van-button slot="button" size="small" type="danger" @click="getCode">{{
-          codeMsg
-        }}</van-button>
+        <van-button slot="button" size="small" type="danger" @click="getCode">
+          {{ codeMsg }}
+        </van-button>
       </van-field>
       <van-button
         :type="isSmsLogin ? 'warning' : 'primary'"
@@ -66,14 +66,16 @@
 <script>
 import User from "../api/user.js";
 import { setFooterMixin } from "../mixins.js";
-import { Field, Button, Icon } from "vant";
+import { Field, Button, Icon, Toast, Dialog } from "vant";
 import md5 from "blueimp-md5";
 import { mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     [Field.name]: Field,
     [Button.name]: Button,
-    [Icon.name]: Icon
+    [Icon.name]: Icon,
+    [Toast.name]: Toast,
+    [Dialog.name]: Dialog
   },
   props: {},
   mixins: [setFooterMixin],
@@ -113,11 +115,41 @@ export default {
       setUserInfo: "SET_USER_INFO"
     }),
     async login(data) {
-      const res = await User.fetchLogin(data);
-      this.isLoading = false;
-      if (res.data.code === 1) {
-        this.setIsLogin(true);
-        this.getUserInfo();
+      // const res = await User.fetchLogin(data);
+      // this.isLoading = false;
+      // if (res.data.code === 1) {
+      //   this.setIsLogin(true);
+      //   this.getUserInfo();
+      // }
+      try {
+        let res = await this.$axios({
+          url: "http://127.0.0.1:3000/user/login",
+          method: "post",
+          data
+        });
+        console.log(res);
+        this.isLoading = false;
+        if (res.data.code === 200) {
+          this.setIsLogin(true);
+          Toast.success("登录成功");
+          this.getUserInfo();
+        } else if (res.data.code === 201) {
+          Toast.success("注册成功");
+          this.setIsLogin(true);
+          this.getUserInfo();
+        } else if (res.data.code === 202) {
+          Dialog.alert({
+            title: "提示",
+            message: "用户名不存在，请使用手机号注册"
+          });
+        } else if (res.data.code === 300) {
+          Dialog.alert({
+            title: "提示",
+            message: "密码不匹配"
+          });
+        }
+      } catch (err) {
+        console.log(err);
       }
     },
     async getUserInfo(code) {
@@ -125,7 +157,9 @@ export default {
       let user = res.data.user;
       this.setUserInfo(user);
       let path = this.$route.query.redirect || "/user";
-      this.$router.push(path);
+      setTimeout(() => {
+        this.$router.push(path);
+      }, 1000);
     },
     toggleOpen() {
       this.isOpen = !this.isOpen;
@@ -193,13 +227,14 @@ export default {
       }
       this.isLoading = true;
       let data = {
-        username: this.username
+        userName: this.username
       };
       if (this.isSmsLogin) {
-        data.code = this.code;
+        data.code = md5(this.code);
       } else {
         data.password = md5(this.password);
       }
+      data.isSmsLogin = this.isSmsLogin;
       this.login(data);
     }
   },
