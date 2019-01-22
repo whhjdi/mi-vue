@@ -42,9 +42,9 @@
         clearable
         :error-message="errMsg2"
       >
-        <van-button slot="button" size="small" type="danger" @click="getCode">
-          {{ codeMsg }}
-        </van-button>
+        <van-button slot="button" size="small" type="danger" @click="getCode">{{
+          codeMsg
+        }}</van-button>
       </van-field>
       <van-button
         :type="isSmsLogin ? 'warning' : 'primary'"
@@ -66,7 +66,7 @@
 <script>
 import User from "../api/user.js";
 import { setFooterMixin } from "../mixins.js";
-import { Field, Button, Icon, Toast, Dialog } from "vant";
+import { Field, Button, Icon, Dialog } from "vant";
 import md5 from "blueimp-md5";
 import { mapGetters, mapMutations } from "vuex";
 export default {
@@ -74,7 +74,6 @@ export default {
     [Field.name]: Field,
     [Button.name]: Button,
     [Icon.name]: Icon,
-    [Toast.name]: Toast,
     [Dialog.name]: Dialog
   },
   props: {},
@@ -115,42 +114,53 @@ export default {
       setUserInfo: "SET_USER_INFO"
     }),
     async login(data) {
-      // const res = await User.fetchLogin(data);
-      // this.isLoading = false;
-      // if (res.data.code === 1) {
-      //   this.setIsLogin(true);
-      //   this.getUserInfo();
-      // }
-      try {
-        let res = await this.$axios({
-          url: "http://127.0.0.1:3000/user/login",
-          method: "post",
-          data
+      //模拟的登录注册
+      const res = await User.fetchLogin(data);
+      this.isLoading = false;
+      if (res.data.code === 1) {
+        Dialog.alert({
+          title: "提示",
+          message: "登录成功"
         });
-        console.log(res);
-        this.isLoading = false;
-        if (res.data.code === 200) {
-          this.setIsLogin(true);
-          Toast.success("登录成功");
-          this.getUserInfo();
-        } else if (res.data.code === 201) {
-          Toast.success("注册成功");
-          this.setIsLogin(true);
-          this.getUserInfo();
-        } else if (res.data.code === 202) {
-          Dialog.alert({
-            title: "提示",
-            message: "用户名不存在，请使用手机号注册"
-          });
-        } else if (res.data.code === 300) {
-          Dialog.alert({
-            title: "提示",
-            message: "密码不匹配"
-          });
-        }
-      } catch (err) {
-        console.log(err);
+        this.setIsLogin(true);
+        this.getUserInfo();
       }
+      //使用自己写的登录注册
+      // try {
+      //   let res = await this.$axios({
+      //     url: "http://127.0.0.1:3000/user/login",
+      //     method: "post",
+      //     data
+      //   });
+      //   this.isLoading = false;
+      //   if (res.data.code === 200) {
+      //     this.setIsLogin(true);
+      //     Dialog.alert({
+      //       title: "提示",
+      //       message: "登录成功"
+      //     });
+      //     this.getUserInfo();
+      //   } else if (res.data.code === 201) {
+      //     Dialog.alert({
+      //       title: "提示",
+      //       message: "注册成功"
+      //     });
+      //     this.setIsLogin(true);
+      //     this.getUserInfo();
+      //   } else if (res.data.code === 202) {
+      //     Dialog.alert({
+      //       title: "提示",
+      //       message: "用户名不存在，请使用手机号注册"
+      //     });
+      //   } else if (res.data.code === 300) {
+      //     Dialog.alert({
+      //       title: "提示",
+      //       message: "密码不匹配"
+      //     });
+      //   }
+      // } catch (err) {
+      //   console.log(err);
+      // }
     },
     async getUserInfo(code) {
       const res = await User.fetchInfo(code);
