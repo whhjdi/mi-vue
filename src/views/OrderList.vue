@@ -28,7 +28,7 @@
                 >
                   <img
                     v-lazy="good.image_url"
-                    alt=""
+                    alt
                     style="width:50px"
                     class="good-img"
                   />
@@ -42,8 +42,8 @@
                 }}
               </div>
             </li>
-          </ul></van-tab
-        >
+          </ul>
+        </van-tab>
       </van-tabs>
     </div>
   </div>
@@ -57,7 +57,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "orderList",
   // eslint-disable-next-line
-  components: { [Tab.name]: Tab, [Tabs.name]: Tabs },
+		components: { [Tab.name]: Tab, [Tabs.name]: Tabs },
   props: {},
   mixins: [titleNavBarMixin, setFooterMixin],
   data() {
@@ -141,6 +141,7 @@ export default {
   bottom: 60px;
   left: 0;
   right: 0;
+  overflow: auto;
   .content {
     margin-top: 46px;
     .list {
